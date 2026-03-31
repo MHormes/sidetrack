@@ -1,0 +1,51 @@
+@import "tailwindcss";
+
+/* ─── Color palette ──────────────────────────────────────────────────────────
+   All color values live here. Never hardcode a color in a component.
+   Add new tokens here if you need a shade not covered below.
+
+   Usage in components:  bg-base  text-fg  border-edge  divide-seam  etc.
+   Usage in raw CSS:     var(--color-base)  var(--color-accent)  etc.
+   ────────────────────────────────────────────────────────────────────────── */
+
+@theme inline {
+  /* Surfaces — dark (most sections) */
+  --color-base:           #111110;   /* section background */
+  --color-elevated:       #1c1b19;   /* slightly raised surface */
+  --color-subtle:         #272523;   /* cards, placeholder boxes */
+
+  /* Surfaces — light (GigDates, Videos) */
+  --color-inverse:        #faf9f7;   /* light section background */
+  --color-inverse-subtle: #f0ede9;   /* cards, placeholder boxes on light */
+
+  /* Brand accent */
+  --color-accent:         #b87058;
+  --color-accent-hover:   #c98470;
+  --color-on-accent:      #1a1917;   /* text placed on top of accent bg */
+
+  /* Text — on dark backgrounds */
+  --color-fg:             #f5f2ef;   /* headings, primary */
+  --color-fg-muted:       #b0aca6;   /* body copy, secondary */
+  --color-fg-subtle:      #6b6760;   /* captions, hints */
+  --color-fg-faint:       #4a4744;   /* ghost / placeholder labels */
+
+  /* Text — on light backgrounds */
+  --color-fg-inverse:         #1a1917;   /* headings, primary */
+  --color-fg-inverse-muted:   #6b6760;   /* body copy, secondary */
+  --color-fg-inverse-subtle:  #9a948e;   /* captions, past-show text */
+
+  /* Borders & dividers */
+  --color-edge:       #272523;   /* header/footer borders on dark */
+  --color-edge-mid:   #4a4744;   /* outline button border (default) */
+  --color-edge-soft:  #6b6760;   /* outline button border (hover) */
+  --color-seam:       #e8e4e0;   /* row dividers on light */
+
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--color-base);
+  color: var(--color-fg);
+  font-family: Arial, Helvetica, sans-serif;
+}

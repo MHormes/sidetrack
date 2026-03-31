@@ -1,0 +1,34 @@
+services:
+  web:
+    build: .
+    container_name: sidetrack_web
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: postgres://sidetrack:sidetrack@db:5432/sidetrack
+      NODE_ENV: production
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: postgres:17-alpine
+    container_name: sidetrack_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: sidetrack
+      POSTGRES_PASSWORD: sidetrack
+      POSTGRES_DB: sidetrack
+    ports:
+      - "5432:5432"
+    volumes:
+      - sidetrack_db_data_local:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U sidetrack"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  sidetrack_db_data_local:
