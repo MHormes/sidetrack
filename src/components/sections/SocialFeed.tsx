@@ -1,19 +1,17 @@
-// TODO: replace placeholder tiles with real social embeds or fetched posts
-// Options:
-//   - Instagram: embed individual posts via blockquote + script, or use a widget
-//   - Facebook: Facebook Page Plugin embed
-//   - For dynamic feeds: fetch via Meta Graph API and render server-side
-//   - Simplest static approach: screenshot/export posts as images and use <Image>
+'use client';
 
 import { FaInstagram, FaFacebook } from "react-icons/fa";
+import Script from "next/script";
 
-const placeholderPosts = [
-  { id: 1, platform: "Instagram", date: "28 mrt 2026" },
-  { id: 2, platform: "Instagram", date: "20 mrt 2026" },
-  { id: 3, platform: "Instagram", date: "14 mrt 2026" },
-  { id: 4, platform: "Facebook",  date: "10 mrt 2026" },
-  { id: 5, platform: "Instagram", date: "03 mrt 2026" },
-  { id: 6, platform: "Instagram", date: "25 feb 2026" },
+// How to get the URL for a post:
+//   Instagram: open the post → tap ••• → Copy link  (looks like instagram.com/p/ABC123/)
+//   Facebook:  open the post → tap ••• → Copy link  (looks like facebook.com/permalink.php?...)
+// Just paste the URL as the `url` value below.
+const posts: { platform: "instagram" | "facebook"; url: string }[] = [
+  { platform: "instagram", url: "https://www.instagram.com/p/DWOgqipCKqi/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" },
+  { platform: "instagram", url: "https://www.instagram.com/p/DRDCA-TCHcN/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" },
+  { platform: "instagram", url: "https://www.instagram.com/p/DVqJ3ZSiMTA/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" },
+  { platform: "instagram", url: "https://www.instagram.com/p/DQfRR68iJCk/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" },
 ];
 
 const socialLinks = [
@@ -21,57 +19,72 @@ const socialLinks = [
   { label: "Facebook",  icon: FaFacebook,  href: "https://www.facebook.com/people/sidetracksounds/61579899760309/" },
 ];
 
-const platformIcon: Record<string, React.ComponentType<{ className?: string }>> = {
-  Instagram: FaInstagram,
-  Facebook:  FaFacebook,
-};
-
 export default function SocialFeed() {
   return (
-    <section id="socials" className="bg-base py-24 px-4">
-      <div className="max-w-5xl mx-auto">
+    <>
+      {/* Instagram embed script — processes all instagram-media blockquotes */}
+      <Script
+        src="https://www.instagram.com/embed.js"
+        strategy="lazyOnload"
+        onLoad={() => (window as any).instgrm?.Embeds.process()}
+      />
 
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
-          <div>
-            <h2 className="text-3xl font-black tracking-widest uppercase text-fg mb-2">
-              Volg ons
-            </h2>
-            <p className="text-fg-subtle">Blijf op de hoogte via social media.</p>
+      {/* Facebook SDK — processes all fb-post divs */}
+      <div id="fb-root" />
+      <Script
+        src="https://connect.facebook.net/nl_NL/sdk.js#xfbml=1&version=v18.0"
+        strategy="lazyOnload"
+      />
+
+      <section id="socials" className="bg-base py-24 px-4">
+        <div className="max-w-5xl mx-auto">
+
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
+            <div>
+              <h2 className="text-3xl font-black tracking-widest uppercase text-fg mb-2">
+                Volg ons
+              </h2>
+              <p className="text-fg-subtle">Blijf op de hoogte via social media.</p>
+            </div>
+            <div className="flex gap-4">
+              {socialLinks.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-fg-muted hover:text-fg transition-colors"
+                >
+                  <link.icon className="w-4 h-4" />
+                  {link.label}
+                </a>
+              ))}
+            </div>
           </div>
-          <div className="flex gap-4">
-            {socialLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-fg-muted hover:text-fg transition-colors"
-              >
-                <link.icon className="w-4 h-4" />
-                {link.label}
-              </a>
+
+          <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
+            {posts.map((post, i) => (
+              <div key={i} className="break-inside-avoid">
+                {post.platform === "instagram" ? (
+                  <blockquote
+                    className="instagram-media"
+                    data-instgrm-permalink={post.url}
+                    data-instgrm-version="14"
+                    style={{ minWidth: "100%", margin: 0 }}
+                  />
+                ) : (
+                  <div
+                    className="fb-post"
+                    data-href={post.url}
+                    data-width="100%"
+                  />
+                )}
+              </div>
             ))}
           </div>
-        </div>
 
-        {/* Grid — 3 columns */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-          {placeholderPosts.map((post) => {
-            const Icon = platformIcon[post.platform];
-            return (
-              <div
-                key={post.id}
-                className="relative aspect-square bg-subtle rounded overflow-hidden flex flex-col items-center justify-center gap-2"
-              >
-                {/* TODO: replace with real embed or <Image> */}
-                {Icon && <Icon className="w-6 h-6 text-fg-faint" />}
-                <span className="text-fg-faint text-xs">{post.date}</span>
-              </div>
-            );
-          })}
         </div>
-
-      </div>
-    </section>
+      </section>
+    </>
   );
 }
