@@ -1,21 +1,18 @@
-// TODO: replace placeholder data with real YouTube/Vimeo embed IDs
-// Use YouTube embed: https://www.youtube.com/embed/VIDEO_ID
-// Example: { id: "dQw4w9WgXcQ", title: "Sidetrack – Naam Nummer (live)" }
+// Add videos by pasting the YouTube video ID (the part after ?v= in the URL)
+// e.g. https://www.youtube.com/watch?v=dQw4w9WgXcQ → youtubeId: "dQw4w9WgXcQ"
+// TODO: Update with actual video data and titles
 const videos = [
   {
-    id: "placeholder-1",
+    youtubeId: "dQw4w9WgXcQ",
     title: "Sidetrack – Naam Nummer (live)",
-    // embedUrl: "https://www.youtube.com/embed/VIDEO_ID",
   },
   {
-    id: "placeholder-2",
+    youtubeId: "dQw4w9WgXcQ",
     title: "Sidetrack – Naam Nummer (clip)",
-    // embedUrl: "https://www.youtube.com/embed/VIDEO_ID",
   },
   {
-    id: "placeholder-3",
+    youtubeId: "dQw4w9WgXcQ",
     title: "Sidetrack – Naam Nummer (sessie)",
-    // embedUrl: "https://www.youtube.com/embed/VIDEO_ID",
   },
 ];
 
@@ -31,12 +28,16 @@ export default function Videos() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {videos.map((video) => (
-            <div key={video.id} className="flex flex-col gap-3">
-              {/* TODO: replace with <iframe> embed */}
-              <div className="aspect-video bg-inverse-subtle rounded overflow-hidden flex items-center justify-center">
-                <span className="text-fg-inverse-subtle text-xs tracking-widest uppercase">
-                  video
-                </span>
+            <div key={video.youtubeId + video.title} className="flex flex-col gap-3">
+              <div className="relative aspect-video rounded overflow-hidden bg-inverse-subtle">
+                <iframe
+                  src={`https://www.youtube.com/embed/${video.youtubeId}`}
+                  title={video.title}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  loading="lazy"
+                  className="absolute inset-0 w-full h-full"
+                />
               </div>
               <p className="text-sm font-medium text-fg-inverse-muted">{video.title}</p>
             </div>
