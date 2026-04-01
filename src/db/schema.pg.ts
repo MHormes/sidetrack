@@ -1,5 +1,4 @@
 import {
-  boolean,
   integer,
   pgTable,
   serial,
@@ -8,26 +7,25 @@ import {
   varchar,
 } from "drizzle-orm/pg-core";
 
-export const products = pgTable("products", {
-  id: serial("id").primaryKey(),
-  name: varchar("name", { length: 255 }).notNull(),
-  description: text("description"),
-  priceCents: integer("price_cents").notNull(),
-  imageUrl: varchar("image_url", { length: 500 }),
-  available: boolean("available").notNull().default(true),
+export const orders = pgTable("orders", {
+  id:        serial("id").primaryKey(),
+  naam:      varchar("naam", { length: 255 }).notNull(),
+  email:     varchar("email", { length: 255 }).notNull(),
+  telefoon:  varchar("telefoon", { length: 50 }),
+  straat:    varchar("straat", { length: 255 }).notNull(),
+  postcode:  varchar("postcode", { length: 20 }).notNull(),
+  stad:      varchar("stad", { length: 100 }).notNull(),
+  opmerking: text("opmerking"),
+  status:    varchar("status", { length: 50 }).notNull().default("pending"),
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });
 
-export const preorders = pgTable("preorders", {
-  id: serial("id").primaryKey(),
-  productId: integer("product_id")
-    .notNull()
-    .references(() => products.id),
-  name: varchar("name", { length: 255 }).notNull(),
-  email: varchar("email", { length: 255 }).notNull(),
-  address: text("address"),
-  quantity: integer("quantity").notNull().default(1),
-  status: varchar("status", { length: 50 }).notNull().default("pending"),
-  notes: text("notes"),
-  createdAt: timestamp("created_at").notNull().defaultNow(),
+export const orderItems = pgTable("order_items", {
+  id:           serial("id").primaryKey(),
+  orderId:      integer("order_id").notNull().references(() => orders.id),
+  productId:    integer("product_id").notNull(),
+  productName:  varchar("product_name", { length: 255 }).notNull(),
+  size:         varchar("size", { length: 20 }),
+  quantity:     integer("quantity").notNull().default(1),
+  priceCents:   integer("price_cents").notNull(),
 });
