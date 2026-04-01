@@ -21,7 +21,7 @@ export default function PhotoGallery() {
           Foto&apos;s
         </h2>
         <p className="text-fg-subtle mb-12">
-          Fotografie: Jolie van de Mortel
+          Fotografie: By-Jolie.nl
         </p>
 
         {/* Grid — 3 columns, mix of sizes */}

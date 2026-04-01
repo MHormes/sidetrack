@@ -17,7 +17,7 @@ export default function Contact() {
         </h2>
         <p className="text-fg-subtle mb-12">Neem contact op voor boekingen of vragen.</p>
 
-        <div className="flex flex-col sm:flex-row gap-8 sm:gap-16">
+        <div className="flex flex-col sm:flex-row gap-8 sm:gap-16 pl-4 sm:pl-0">
           <a
             href={contact.instagram.url}
             target="_blank"

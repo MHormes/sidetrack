@@ -4,6 +4,11 @@ const nextConfig: NextConfig = {
   output: "standalone",
   // Keep native modules out of the Next.js bundle — they are loaded at runtime.
   serverExternalPackages: ["better-sqlite3", "pg"],
+  images: {
+    remotePatterns: [
+      { protocol: "https", hostname: "behold.pictures" },
+    ],
+  },
 };
 
 export default nextConfig;
