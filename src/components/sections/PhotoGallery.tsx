@@ -3,16 +3,15 @@ import Image from "next/image";
 const photos = [
   { id: 0, src: "/images/gallery/photo-00.jpg", span: "col-span-2 row-span-2" },
   { id: 1, src: "/images/gallery/photo-02.jpg", span: "row-span-2" },
-  { id: 2, src: "/images/gallery/photo-02.jpg", span: "" },
+  { id: 2, src: "/images/gallery/photo-05.jpg", span: "" },
   { id: 3, src: "/images/gallery/photo-03.jpg", span: "" },
-  { id: 4, src: "/images/gallery/photo-04.jpg", span: "" },
-  { id: 5, src: "/images/gallery/photo-05.jpg", span: "" },
-  { id: 6, src: "/images/gallery/photo-06.jpg", span: "" },
-  { id: 7, src: "/images/gallery/photo-07.jpg", span: "" },
-  { id: 8, src: "/images/gallery/photo-08.jpg", span: "col-span-2 row-span-2" },
-  { id: 9, src: "/images/gallery/photo-09.jpg", span: "" },
-  { id: 10, src: "/images/gallery/photo-10.jpg", span: "" },
-  { id: 11, src: "/images/gallery/photo-11.jpg", span: "" }
+  { id: 4, src: "/images/gallery/photo-09.jpg", span: "" },
+  { id: 5, src: "/images/gallery/photo-06.jpg", span: "row-span-2" },
+  { id: 6, src: "/images/gallery/photo-01.jpg", span: "col-span-2" },
+  { id: 7, src: "/images/gallery/photo-04.jpg", span: "col-span-2" },
+  { id: 8, src: "/images/gallery/photo-07.jpg", span: "" },
+  { id: 9, src: "/images/gallery/photo-11.jpg", span: "col-span-2 row-span-2" },
+  { id: 10, src: "/images/gallery/photo-08.jpg", span: "" },
 ];
 
 export default function PhotoGallery() {
@@ -24,15 +23,15 @@ export default function PhotoGallery() {
           Foto&apos;s
         </h2>
         <p className="text-fg-subtle mb-12">
-          Fotografie: By-Jolie.nl
+          Fotografie: <a href="https://by-jolie.nl" target="_blank" rel="noopener noreferrer" className="hover:text-fg transition-colors">By-Jolie.nl</a>
         </p>
 
         {/* Grid — 3 columns, mix of sizes */}
-        <div className="grid grid-cols-3 gap-2">
+        <div className="grid grid-cols-3 gap-2" style={{ gridAutoRows: "calc((min(100vw, 64rem) - 2rem) / 3)" }}>
           {photos.map((photo) => (
             <div
               key={photo.id}
-              className={`relative aspect-square bg-subtle rounded overflow-hidden ${photo.span}`}
+              className={`relative bg-subtle rounded overflow-hidden ${photo.span}`}
             >
               <Image
                 src={photo.src}
