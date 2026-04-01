@@ -35,8 +35,6 @@ COPY --from=builder --chown=nextjs:nodejs /app/drizzle ./drizzle
 # Copy native modules — better-sqlite3 is not bundled by Next.js
 COPY --from=builder --chown=nextjs:nodejs /app/node_modules/better-sqlite3 ./node_modules/better-sqlite3
 COPY --from=builder --chown=nextjs:nodejs /app/node_modules/pg ./node_modules/pg
-COPY --from=builder --chown=nextjs:nodejs /app/node_modules/pg-pool ./node_modules/pg-pool
-COPY --from=builder --chown=nextjs:nodejs /app/node_modules/pg-protocol ./node_modules/pg-protocol
 
 # Ensure the data directory exists and is writable (only used if DATABASE_URL is a local file path)
 RUN mkdir -p /app/data && chown nextjs:nodejs /app/data
