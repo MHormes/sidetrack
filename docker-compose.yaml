@@ -1,15 +1,40 @@
 services:
+  web:
+    build: .
+    container_name: sidetrack_web
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    env_file: .env.production
+    depends_on:
+      db:
+        condition: service_healthy
+
   db:
     image: postgres:17-alpine
+    container_name: sidetrack_db
     restart: unless-stopped
     environment:
       POSTGRES_USER: sidetrack
-      POSTGRES_PASSWORD: sidetrack
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-sidetrack}
       POSTGRES_DB: sidetrack
-    ports:
-      - "5432:5432"
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - sidetrack_db_data_prod:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U sidetrack"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  tunnel:
+    image: cloudflare/cloudflared:latest
+    container_name: sidetrack_tunnel
+    restart: unless-stopped
+    command: tunnel --no-autoupdate run
+    environment:
+      TUNNEL_TOKEN: ${CLOUDFLARE_TUNNEL_TOKEN}
+    depends_on:
+      - web
 
 volumes:
-  pgdata:
+  sidetrack_db_data_prod:

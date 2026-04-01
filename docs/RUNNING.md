@@ -135,11 +135,6 @@ Shell aliases are configured on both the laptop and the server to speed up commo
 
 ### Server Aliases
 
-```bash
-alias sid-pull='cd ~/sidetrack && git pull origin main'
-alias sid-deploy='cd ~/sidetrack && bash scripts/setup.sh production'
-```
-
 | Alias         | Description                                 |
 | ------------- | ------------------------------------------- |
 | `side-pull`   | Pull the latest changes from Git.           |

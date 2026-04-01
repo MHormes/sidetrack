@@ -81,10 +81,10 @@ elif [ "$PROFILE" = "local" ]; then
     pnpm db:generate:pg
 
     echo "🛑 Bestaande containers stoppen..."
-    docker compose -f compose.local.yml down
+    docker compose -f docker-compose-local.yml down
 
     echo "🚀 Bouwen en opstarten..."
-    docker compose -f compose.local.yml up -d --build
+    docker compose -f docker-compose-local.yml up -d --build
 
     echo ""
     echo "✅ Lokale Docker stack draait op http://localhost:3000"
@@ -114,10 +114,10 @@ elif [ "$PROFILE" = "production" ]; then
     pnpm db:generate:pg
 
     echo "🛑 Bestaande containers stoppen..."
-    docker compose down
+    docker compose -f docker-compose.yaml down
 
     echo "🚀 Bouwen en opstarten..."
-    docker compose --env-file "$ENV_SOURCE" up -d --build
+    docker compose -f docker-compose.yaml --env-file "$ENV_SOURCE" up -d --build
 
     toggle_maintenance "off"
 
