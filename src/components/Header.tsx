@@ -20,7 +20,7 @@ export default function Header() {
           <Link href="/#band" className="hover:text-fg transition-colors">Band</Link>
           <Link href="/#videos" className="hover:text-fg transition-colors">Video&apos;s</Link>
           <Link href="/#contact" className="hover:text-fg transition-colors">Contact</Link>
-          <Link href="/shop" className="text-accent hover:text-accent transition-colors">Shop</Link>
+          {/* <Link href="/shop" className="text-accent hover:text-accent transition-colors">Shop</Link> */}
         </nav>
       </div>
     </header>
