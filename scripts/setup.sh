@@ -110,9 +110,6 @@ elif [ "$PROFILE" = "production" ]; then
 
     toggle_maintenance "on"
 
-    echo "🗄️  PostgreSQL migraties genereren..."
-    pnpm db:generate:pg
-
     echo "🛑 Bestaande containers stoppen..."
     docker compose -f docker-compose.yaml down
 
