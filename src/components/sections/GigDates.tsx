@@ -1,15 +1,4 @@
-const upcomingShows = [
-  { date: "30 mei 2026", venue: "Postert Laef", city: "Posterholt", ticketUrl: "https://roerdalelaef.nl/tickets1/" },
-  { date: "28 jun 2026", venue: "Gluren bij de Buren 2026", city: "Herten" },
-  { date: "8 aug 2026", venue: "HEIJ", city: "St. Odilienberg", ticketUrl: "https://www.heijfestival.nl/#tickets", possibly: true },
-];
-
-const pastShows = [
-  { date: "22 mar 2026", venue: "De Boshut", city: "Herkenbosch"   },
-  { date: "07 nov 2025", venue: "De Spil",  city: "Maasbracht"  },
-  { date: "30 aug 2025", venue: "Verjaardags feest", city: "Herten", private: true},
-  { date: "29 jun 2025", venue: "Gluren bij de Buren 2025", city: "Herten" },
-];
+import { upcomingShows, pastShows } from "@/lib/shows";
 
 export default function GigDates() {
   return (
