@@ -8,9 +8,10 @@ export const contentType = "image/png";
 
 export default async function Image() {
   const logoData = await readFile(
-    join(process.cwd(), "public/images/logo/fineline.png")
+    join(process.cwd(), "public/images/logo/fineline.png"),
+    "base64"
   );
-  const logoSrc = `data:image/png;base64,${Buffer.from(logoData).toString("base64")}`;
+  const logoSrc = `data:image/png;base64,${logoData}`;
 
   return new ImageResponse(
     (
@@ -27,17 +28,16 @@ export default async function Image() {
         }}
       >
         <img src={logoSrc} height={260} style={{ objectFit: "contain" }} />
-        <p
+        <div
           style={{
             color: "#b0aca6",
             fontSize: "32px",
             letterSpacing: "0.15em",
-            margin: 0,
             fontFamily: "sans-serif",
           }}
         >
           Altijd Sfeervol, Altijd Sidetrack!
-        </p>
+        </div>
       </div>
     ),
     { ...size }
