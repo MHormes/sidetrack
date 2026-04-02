@@ -34,6 +34,41 @@ export const metadata: Metadata = {
   },
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "MusicGroup",
+  name: "Sidetrack",
+  url: siteUrl,
+  description: "Altijd Sfeervol, Altijd Sidetrack! Coverband uit Limburg.",
+  genre: ["Cover", "Pop", "Rock"],
+  foundingLocation: {
+    "@type": "Place",
+    name: "Limburg, Nederland",
+  },
+  member: [
+    {
+      "@type": "OrganizationRole",
+      member: { "@type": "Person", name: "Lisa Joosten" },
+      roleName: "Zang / Gitaar",
+    },
+    {
+      "@type": "OrganizationRole",
+      member: { "@type": "Person", name: "Sten Ruijten" },
+      roleName: "Bas / Zang",
+    },
+    {
+      "@type": "OrganizationRole",
+      member: { "@type": "Person", name: "Maarten Hormes" },
+      roleName: "Gitaar / Zang",
+    },
+    {
+      "@type": "OrganizationRole",
+      member: { "@type": "Person", name: "Max Wolters" },
+      roleName: "Drums",
+    },
+  ],
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -44,6 +79,12 @@ export default function RootLayout({
       lang="nl"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );
