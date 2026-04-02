@@ -12,9 +12,26 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const siteUrl = "https://sidetrackmusic.nl";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: "Sidetrack",
-  description: "Sidetrack — officiële website",
+  description: "Altijd Sfeervol, Altijd Sidetrack! Sidetrack is een coverband uit Limburg. Bekijk onze shows, foto's en meer.",
+  keywords: ["Sidetrack", "coverband", "Limburg", "liveband", "feestband", "evenementen", "Nederland"],
+  openGraph: {
+    type: "website",
+    url: siteUrl,
+    siteName: "Sidetrack",
+    title: "Sidetrack",
+    description: "Altijd Sfeervol, Altijd Sidetrack!",
+    locale: "nl_NL",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Sidetrack",
+    description: "Altijd Sfeervol, Altijd Sidetrack!",
+  },
 };
 
 export default function RootLayout({
