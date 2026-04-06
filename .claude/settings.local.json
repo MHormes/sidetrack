@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "Bash(cat drizzle/sqlite/0001_*.sql)"
+      "Bash(cat drizzle/sqlite/0001_*.sql)",
+      "Bash(find:*)",
+      "Bash(pnpm add:*)"
     ]
   }
 }

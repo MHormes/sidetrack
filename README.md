@@ -29,7 +29,7 @@ There are three ways to run Sidetrack:
 | -------------- | --------------------------------------------------------------------------------------------------------------------------------- |
 | **Dev**        | Recommended for day-to-day development. Runs with SQLite — no Docker or external services needed.                                 |
 | **Local**      | Full containerized stack (Next.js app + PostgreSQL) via `compose.local.yml`. Closest to production without the Cloudflare tunnel. |
-| **Production** | Server deployment via `compose.yaml`. Adds a Cloudflare Tunnel container for public HTTPS access via `sidetrackmusic.nl`.         |
+| **Production** | Server deployment via `compose.yaml`. Adds a Cloudflare Tunnel container for public HTTPS access via `sidetracksounds.nl`.        |
 
 For setup instructions, environment variables, aliases, and the nightly backup cron job see [RUNNING.md](RUNNING.md).
 

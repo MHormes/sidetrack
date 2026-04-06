@@ -78,7 +78,7 @@ This spins up the full stack (Next.js app + PostgreSQL) in Docker containers usi
 
 ## 3. Production Docker Compose
 
-The production setup (`compose.yaml`) runs on the Proxmox server and includes a Cloudflare Tunnel container for public HTTPS access via `sidetrackmusic.nl`. The database port is not exposed to the host — all traffic goes through the tunnel.
+The production setup (`compose.yaml`) runs on the Proxmox server and includes a Cloudflare Tunnel container for public HTTPS access via `sidetracksounds.nl`. The database port is not exposed to the host — all traffic goes through the tunnel.
 
 **Prerequisites:**
 

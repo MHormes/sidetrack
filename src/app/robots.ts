@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://sidetrackmusic.nl/sitemap.xml",
+    sitemap: "https://sidetracksounds.nl/sitemap.xml",
   };
 }

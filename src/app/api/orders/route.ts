@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db, orders, orderItems } from "@/db";
+import { sendOrderEmails } from "@/lib/email";
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
@@ -50,6 +51,8 @@ export async function POST(req: NextRequest) {
       priceCents:  item.priceCents,
     }))
   );
+
+  await sendOrderEmails(order.id, customer, items);
 
   return NextResponse.json({ orderId: order.id }, { status: 201 });
 }
