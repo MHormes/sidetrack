@@ -108,6 +108,9 @@ elif [ "$PROFILE" = "production" ]; then
     source "$ENV_SOURCE"
     set +o allexport
 
+    echo "📦 Afhankelijkheden installeren..."
+    pnpm install --frozen-lockfile
+
     toggle_maintenance "on"
 
     echo "🗄️  PostgreSQL migraties genereren..."
