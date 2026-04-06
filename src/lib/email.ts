@@ -31,7 +31,7 @@ function totalCents(items: OrderItem[]): number {
   return items.reduce((sum, item) => sum + item.priceCents * item.quantity, 0);
 }
 
-function itemsTable(items: OrderItem[]): string {
+function customerItemsTable(items: OrderItem[]): string {
   const rows = items
     .map(
       (item) => `
@@ -59,6 +59,39 @@ function itemsTable(items: OrderItem[]): string {
         <tr style="background:#272523;">
           <td colspan="3" style="padding:10px 12px;text-align:right;font-weight:700;color:#b0aca6;">Totaal</td>
           <td style="padding:10px 12px;text-align:right;font-weight:700;color:#b87058;">${formatPrice(totalCents(items))}</td>
+        </tr>
+      </tfoot>
+    </table>`;
+}
+
+function bandItemsTable(items: OrderItem[]): string {
+  const rows = items
+    .map(
+      (item) => `
+      <tr>
+        <td style="padding:6px 12px;border-bottom:1px solid #eee;">${item.productName}${item.size ? ` (${item.size})` : ""}</td>
+        <td style="padding:6px 12px;border-bottom:1px solid #eee;text-align:center;">${item.quantity}</td>
+        <td style="padding:6px 12px;border-bottom:1px solid #eee;text-align:right;">${formatPrice(item.priceCents)}</td>
+        <td style="padding:6px 12px;border-bottom:1px solid #eee;text-align:right;">${formatPrice(item.priceCents * item.quantity)}</td>
+      </tr>`
+    )
+    .join("");
+
+  return `
+    <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+      <thead>
+        <tr style="background:#f5f5f5;">
+          <th style="padding:8px 12px;text-align:left;font-weight:600;">Product</th>
+          <th style="padding:8px 12px;text-align:center;font-weight:600;">Aantal</th>
+          <th style="padding:8px 12px;text-align:right;font-weight:600;">Stukprijs</th>
+          <th style="padding:8px 12px;text-align:right;font-weight:600;">Totaal</th>
+        </tr>
+      </thead>
+      <tbody>${rows}</tbody>
+      <tfoot>
+        <tr>
+          <td colspan="3" style="padding:10px 12px;text-align:right;font-weight:700;">Totaal:</td>
+          <td style="padding:10px 12px;text-align:right;font-weight:700;">${formatPrice(totalCents(items))}</td>
         </tr>
       </tfoot>
     </table>`;
@@ -99,7 +132,11 @@ function customerEmailHtml(orderId: number, customer: Customer, items: OrderItem
             <div style="border-top:1px solid #272523;margin-bottom:24px;"></div>
 
             <p style="margin:0 0 8px;font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#6b6760;">Bestelde artikelen</p>
-            ${itemsTable(items)}
+            ${customerItemsTable(items)}
+            ${customer.opmerking ? `
+            <p style="margin:8px 0 0;font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#6b6760;">Opmerking</p>
+            <p style="margin:6px 0 0;font-size:14px;color:#b0aca6;">${customer.opmerking}</p>
+            ` : ""}
 
             <!-- Divider -->
             <div style="border-top:1px solid #272523;margin:24px 0;"></div>
@@ -152,11 +189,11 @@ function bandEmailHtml(orderId: number, customer: Customer, items: OrderItem[]):
     <tr><td style="padding:4px 16px 4px 0;color:#555;">E-mail</td><td><a href="mailto:${customer.email}">${customer.email}</a></td></tr>
     ${customer.telefoon ? `<tr><td style="padding:4px 16px 4px 0;color:#555;">Telefoon</td><td>${customer.telefoon}</td></tr>` : ""}
     <tr><td style="padding:4px 16px 4px 0;color:#555;">Adres</td><td>${customer.straat}, ${customer.postcode} ${customer.stad}</td></tr>
-    ${customer.opmerking ? `<tr><td style="padding:4px 16px 4px 0;color:#555;">Opmerking</td><td>${customer.opmerking}</td></tr>` : ""}
   </table>
 
   <h2 style="font-size:16px;margin-top:24px;margin-bottom:8px;">Bestelling</h2>
-  ${itemsTable(items)}
+  ${bandItemsTable(items)}
+  ${customer.opmerking ? `<p style="margin:8px 0 0;font-size:13px;"><strong>Opmerking:</strong> ${customer.opmerking}</p>` : ""}
 </body>
 </html>`;
 }
