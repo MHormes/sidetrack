@@ -28,6 +28,7 @@ export default function Header() {
           {links.map(({ href, label }) => (
             <Link key={href} href={href} className="hover:text-fg transition-colors">{label}</Link>
           ))}
+          {/* <Link href="/shop" className="text-accent hover:text-accent transition-colors">Shop</Link> */}
         </nav>
 
         {/* Burger button */}
@@ -50,6 +51,7 @@ export default function Header() {
               {label}
             </Link>
           ))}
+          {/* <Link href="/shop" className="text-accent hover:text-accent transition-colors" onClick={() => setOpen(false)}>Shop</Link> */}
         </nav>
       )}
     </header>

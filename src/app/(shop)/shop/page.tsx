@@ -1,6 +1,11 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { products } from "@/lib/products";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/shop" },
+};
 
 export default function ShopPage() {
   return (

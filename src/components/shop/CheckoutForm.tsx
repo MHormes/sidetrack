@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "@/context/cart";
@@ -9,6 +9,7 @@ type FormData = {
   naam: string;
   email: string;
   telefoon: string;
+  huisnummer: string;
   straat: string;
   postcode: string;
   stad: string;
@@ -17,15 +18,47 @@ type FormData = {
 
 const empty: FormData = {
   naam: "", email: "", telefoon: "",
-  straat: "", postcode: "", stad: "", opmerking: "",
+  huisnummer: "", straat: "", postcode: "", stad: "", opmerking: "",
 };
+
+const COUNTRIES = [
+  { code: "NL", prefix: "+31",  label: "🇳🇱 +31"  },
+  { code: "BE", prefix: "+32",  label: "🇧🇪 +32"  },
+  { code: "DE", prefix: "+49",  label: "🇩🇪 +49"  },
+  { code: "FR", prefix: "+33",  label: "🇫🇷 +33"  },
+  { code: "GB", prefix: "+44",  label: "🇬🇧 +44"  },
+  { code: "LU", prefix: "+352", label: "🇱🇺 +352" },
+  { code: "ES", prefix: "+34",  label: "🇪🇸 +34"  },
+  { code: "IT", prefix: "+39",  label: "🇮🇹 +39"  },
+  { code: "PT", prefix: "+351", label: "🇵🇹 +351" },
+];
+
+const DUTCH_POSTCODE = /^\d{4}\s?[A-Z]{2}$/i;
+
+type LookupStatus = "idle" | "loading" | "found" | "not-found" | "manual";
+
+function isValidEmail(value: string) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+}
+
+// E.164: total digits (prefix + local) ≤ 15. Local part: 4–13 digits covers every real number.
+function isValidPhone(value: string) {
+  return value.length >= 4 && value.length <= 13;
+}
 
 export default function CheckoutForm() {
   const { items, removeItem, clearCart } = useCart();
   const [form, setForm] = useState<FormData>(empty);
+  const [prefix, setPrefix] = useState("+31");
+  const [emailError, setEmailError] = useState<string | null>(null);
+  const [phoneError, setPhoneError] = useState<string | null>(null);
+  const [lookupStatus, setLookupStatus] = useState<LookupStatus>("idle");
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const lookupStatusRef = useRef<LookupStatus>("idle");
+  lookupStatusRef.current = lookupStatus;
 
   const subtotal = items.reduce((sum, i) => sum + i.product.price * i.quantity, 0);
 
@@ -33,8 +66,105 @@ export default function CheckoutForm() {
     setForm((prev) => ({ ...prev, [field]: value }));
   }
 
+  // Postcode lookup — only fires when the user changes postcode or huisnummer
+  useEffect(() => {
+    const status = lookupStatusRef.current;
+    if (status === "manual") return;
+
+    const { postcode, huisnummer } = form;
+    const isDutch = DUTCH_POSTCODE.test(postcode.trim());
+
+    // Non-Dutch postcode (complete but wrong format) → manual
+    if (postcode.trim().length >= 6 && !isDutch) {
+      setLookupStatus("manual");
+      return;
+    }
+
+    // Not enough info yet
+    if (!isDutch || !huisnummer.trim()) {
+      if (status !== "idle") setLookupStatus("idle");
+      return;
+    }
+
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+    debounceRef.current = setTimeout(async () => {
+      setLookupStatus("loading");
+      try {
+        const res = await fetch(
+          `/api/address-lookup?postcode=${encodeURIComponent(postcode.trim())}&huisnummer=${encodeURIComponent(huisnummer.trim())}`
+        );
+        if (res.ok) {
+          const data = await res.json();
+          setForm((prev) => ({ ...prev, straat: data.street, stad: data.city }));
+          setLookupStatus("found");
+        } else {
+          setLookupStatus("not-found");
+        }
+      } catch {
+        setLookupStatus("not-found");
+      }
+    }, 400);
+
+    return () => {
+      if (debounceRef.current) clearTimeout(debounceRef.current);
+    };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [form.postcode, form.huisnummer]);
+
+  function handlePhoneChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const digits = e.target.value.replace(/\D/g, "");
+    set("telefoon", digits);
+    if (phoneError) setPhoneError(null);
+  }
+
+  function handlePhoneBlur() {
+    if (!isValidPhone(form.telefoon)) {
+      setPhoneError("Vul een geldig telefoonnummer in.");
+    } else {
+      setPhoneError(null);
+    }
+  }
+
+  function handleEmailBlur() {
+    if (form.email && !isValidEmail(form.email)) {
+      setEmailError("Vul een geldig e-mailadres in.");
+    } else {
+      setEmailError(null);
+    }
+  }
+
+  function handlePostcodeChange(e: React.ChangeEvent<HTMLInputElement>) {
+    set("postcode", e.target.value);
+    // Reset to idle so lookup re-triggers; unless already manual
+    if (lookupStatus !== "manual") setLookupStatus("idle");
+    // Clear auto-filled fields when postcode changes
+    if (lookupStatus === "found") {
+      setForm((prev) => ({ ...prev, postcode: e.target.value, straat: "", stad: "" }));
+    }
+  }
+
+  function handleHuisnummerChange(e: React.ChangeEvent<HTMLInputElement>) {
+    set("huisnummer", e.target.value);
+    if (lookupStatus === "found") {
+      setForm((prev) => ({ ...prev, huisnummer: e.target.value, straat: "", stad: "" }));
+      setLookupStatus("idle");
+    }
+  }
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+
+    let valid = true;
+    if (!isValidEmail(form.email)) {
+      setEmailError("Vul een geldig e-mailadres in.");
+      valid = false;
+    }
+    if (!isValidPhone(form.telefoon)) {
+      setPhoneError("Vul een geldig telefoonnummer in.");
+      valid = false;
+    }
+    if (!valid) return;
+
     setError(null);
     setLoading(true);
     try {
@@ -42,7 +172,15 @@ export default function CheckoutForm() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          customer: form,
+          customer: {
+            naam: form.naam,
+            email: form.email,
+            telefoon: form.telefoon ? `${prefix} ${form.telefoon}` : "",
+            straat: `${form.straat} ${form.huisnummer}`.trim(),
+            postcode: form.postcode,
+            stad: form.stad,
+            opmerking: form.opmerking,
+          },
           items: items.map((i) => ({
             productId:   i.product.id,
             productName: i.product.name,
@@ -77,7 +215,7 @@ export default function CheckoutForm() {
             Bestelling ontvangen!
           </h2>
           <p className="text-fg-muted max-w-sm">
-            Bedankt voor je bestelling. We nemen zo snel mogelijk contact op via <span className="text-fg font-medium">{form.email}</span> voor betaling &amp; levering.
+            Bedankt voor je bestelling. We nemen zo snel mogelijk contact op via <span className="text-fg font-medium">{form.email} </span> voor betaling &amp; levering.
           </p>
         </div>
         <Link
@@ -104,6 +242,11 @@ export default function CheckoutForm() {
     );
   }
 
+  const inputClass = "bg-subtle border border-edge text-fg placeholder:text-fg-faint px-4 py-3 text-sm focus:outline-none focus:border-edge-soft w-full resize-none";
+  const disabledClass = "disabled:opacity-50 disabled:cursor-not-allowed";
+  const addressEditable = lookupStatus === "not-found" || lookupStatus === "manual";
+  const addressLoading = lookupStatus === "loading";
+
   return (
     <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-2 gap-12">
 
@@ -123,58 +266,132 @@ export default function CheckoutForm() {
           />
         </Field>
 
-        <Field label="E-mailadres" required>
+        {/* Email */}
+        <div className="flex flex-col gap-1.5">
+          <label className="text-xs font-bold tracking-widest uppercase text-fg-muted">
+            E-mailadres<span className="text-accent ml-1">*</span>
+          </label>
           <input
             type="email"
             value={form.email}
-            onChange={(e) => set("email", e.target.value)}
+            onChange={(e) => { set("email", e.target.value); if (emailError) setEmailError(null); }}
+            onBlur={handleEmailBlur}
             required
             placeholder="jouw@email.nl"
+            className={`${inputClass} ${emailError ? "border-red-400" : ""}`}
           />
-        </Field>
+          {emailError && <p className="text-xs text-red-400">{emailError}</p>}
+        </div>
 
-        <Field label="Telefoonnummer">
-          <input
-            type="tel"
-            value={form.telefoon}
-            onChange={(e) => set("telefoon", e.target.value)}
-            placeholder="+31 6 00 00 00 00"
-          />
-        </Field>
+        {/* Phone with country prefix */}
+        <div className="flex flex-col gap-1.5">
+          <label className="text-xs font-bold tracking-widest uppercase text-fg-muted">
+            Telefoonnummer<span className="text-accent ml-1">*</span>
+          </label>
+          <div className="flex gap-2">
+            <select
+              value={prefix}
+              onChange={(e) => setPrefix(e.target.value)}
+              className="bg-subtle border border-edge text-fg text-sm px-2 py-3 focus:outline-none focus:border-edge-soft shrink-0"
+            >
+              {COUNTRIES.map((c) => (
+                <option key={c.code} value={c.prefix}>{c.label}</option>
+              ))}
+            </select>
+            <input
+              type="text"
+              inputMode="numeric"
+              value={form.telefoon}
+              onChange={handlePhoneChange}
+              onBlur={handlePhoneBlur}
+              placeholder="6 12 34 56 78"
+              className={`${inputClass} ${phoneError ? "border-red-400" : ""}`}
+            />
+          </div>
+          {phoneError && <p className="text-xs text-red-400">{phoneError}</p>}
+        </div>
 
         <h2 className="text-xs font-bold tracking-widest uppercase text-fg-subtle border-b border-edge pb-3 mt-2">
           Bezorgadres
         </h2>
 
-        <Field label="Straat & huisnummer" required>
+        {/* Postcode + huisnummer row */}
+        <div className="grid grid-cols-[2fr_1fr] gap-4">
+          <div className="flex flex-col gap-1.5">
+            <label className="text-xs font-bold tracking-widest uppercase text-fg-muted">
+              Postcode<span className="text-accent ml-1">*</span>
+            </label>
+            <input
+              type="text"
+              value={form.postcode}
+              onChange={handlePostcodeChange}
+              required
+              placeholder="1234 AB"
+              className={inputClass}
+            />
+          </div>
+          <div className="flex flex-col gap-1.5">
+            <label className="text-xs font-bold tracking-widest uppercase text-fg-muted">
+              Huisnummer<span className="text-accent ml-1">*</span>
+            </label>
+            <input
+              type="text"
+              value={form.huisnummer}
+              onChange={handleHuisnummerChange}
+              required
+              placeholder="10A"
+              className={inputClass}
+            />
+          </div>
+        </div>
+
+        {/* Lookup status messages */}
+        {addressLoading && (
+          <p className="text-xs text-fg-subtle -mt-3">Adres opzoeken...</p>
+        )}
+        {lookupStatus === "not-found" && (
+          <p className="text-xs text-fg-subtle -mt-3">Adres niet gevonden. Vul straat en stad handmatig in.</p>
+        )}
+
+        {/* Straat */}
+        <div className="flex flex-col gap-1.5">
+          <label className="text-xs font-bold tracking-widest uppercase text-fg-muted">
+            Straat<span className="text-accent ml-1">*</span>
+          </label>
           <input
             type="text"
             value={form.straat}
             onChange={(e) => set("straat", e.target.value)}
             required
-            placeholder="Straatnaam 1"
+            disabled={!addressEditable}
+            placeholder="Straatnaam"
+            className={`${inputClass} ${disabledClass}`}
           />
-        </Field>
+          {lookupStatus === "found" && (
+            <button
+              type="button"
+              onClick={() => { setLookupStatus("manual"); }}
+              className="text-xs text-fg-subtle hover:text-fg transition-colors self-start"
+            >
+              Wijzigen
+            </button>
+          )}
+        </div>
 
-        <div className="grid grid-cols-2 gap-4">
-          <Field label="Postcode" required>
-            <input
-              type="text"
-              value={form.postcode}
-              onChange={(e) => set("postcode", e.target.value)}
-              required
-              placeholder="1234 AB"
-            />
-          </Field>
-          <Field label="Stad" required>
-            <input
-              type="text"
-              value={form.stad}
-              onChange={(e) => set("stad", e.target.value)}
-              required
-              placeholder="Amsterdam"
-            />
-          </Field>
+        {/* Stad */}
+        <div className="flex flex-col gap-1.5">
+          <label className="text-xs font-bold tracking-widest uppercase text-fg-muted">
+            Stad<span className="text-accent ml-1">*</span>
+          </label>
+          <input
+            type="text"
+            value={form.stad}
+            onChange={(e) => set("stad", e.target.value)}
+            required
+            disabled={!addressEditable}
+            placeholder="Amsterdam"
+            className={`${inputClass} ${disabledClass}`}
+          />
         </div>
 
         <Field label="Opmerking">
@@ -271,12 +488,9 @@ function Field({ label, required, children }: {
       <label className="text-xs font-bold tracking-widest uppercase text-fg-muted">
         {label}{required && <span className="text-accent ml-1">*</span>}
       </label>
-      {/* Clone child to inject shared input styles */}
       {React.cloneElement(children, {
         className: "bg-subtle border border-edge text-fg placeholder:text-fg-faint px-4 py-3 text-sm focus:outline-none focus:border-edge-soft w-full resize-none",
       } as React.HTMLAttributes<HTMLElement>)}
     </div>
   );
 }
-
-import React from "react";

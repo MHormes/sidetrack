@@ -12,7 +12,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const siteUrl = "https://sidetrackmusic.nl";
+const siteUrl = "https://sidetracksounds.nl";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

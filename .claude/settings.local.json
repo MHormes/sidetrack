@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cat drizzle/sqlite/0001_*.sql)"
+    ]
+  }
+}

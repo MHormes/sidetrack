@@ -1,9 +1,20 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { products, getProduct } from "@/lib/products";
 import SizeSelector from "@/components/shop/SizeSelector";
 import AddToCartButton from "@/components/shop/AddToCartButton";
+import ProductCarousel from "@/components/shop/ProductCarousel";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
+  const { id } = await params;
+  return { alternates: { canonical: `/shop/${id}` } };
+}
 
 export function generateStaticParams() {
   return products.map((p) => ({ id: String(p.id) }));
@@ -33,34 +44,42 @@ export default async function ProductPage({
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-16">
 
-          {/* Image */}
-          <div className="relative bg-subtle overflow-hidden w-full aspect-square flex items-center justify-center">
-            {product.image ? (
-              <Image
-                src={product.image}
-                alt={product.name}
-                width={800}
-                height={800}
-                className="w-full h-full object-cover"
-                priority
-              />
-            ) : (
-              <Image
-                src="/images/logo/fineline.png"
-                alt=""
-                width={200}
-                height={272}
-                className="w-24 h-auto opacity-10"
-              />
-            )}
-            {product.soldOut && (
-              <div className="absolute inset-0 bg-base/70 flex items-center justify-center">
-                <span className="text-sm font-bold tracking-widest uppercase text-fg-subtle border border-fg-faint px-4 py-2">
-                  Uitverkocht
-                </span>
-              </div>
-            )}
-          </div>
+          {/* Image / Carousel */}
+          {product.images && product.images.length > 0 ? (
+            <ProductCarousel
+              images={product.images}
+              name={product.name}
+              soldOut={product.soldOut}
+            />
+          ) : (
+            <div className="relative bg-subtle overflow-hidden w-full aspect-square flex items-center justify-center">
+              {product.image ? (
+                <Image
+                  src={product.image}
+                  alt={product.name}
+                  width={800}
+                  height={800}
+                  className="w-full h-full object-cover"
+                  priority
+                />
+              ) : (
+                <Image
+                  src="/images/logo/fineline.png"
+                  alt=""
+                  width={200}
+                  height={272}
+                  className="w-24 h-auto opacity-10"
+                />
+              )}
+              {product.soldOut && (
+                <div className="absolute inset-0 bg-base/70 flex items-center justify-center">
+                  <span className="text-sm font-bold tracking-widest uppercase text-fg-subtle border border-fg-faint px-4 py-2">
+                    Uitverkocht
+                  </span>
+                </div>
+              )}
+            </div>
+          )}
 
           {/* Details */}
           <div className="flex flex-col gap-6">

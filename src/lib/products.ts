@@ -10,6 +10,7 @@ export type Product = {
   category: string;
   description: string;
   image: string | null;
+  images?: string[];
   soldOut?: boolean;
   sizes?: ProductSize[];
   sizeNote?: string;
@@ -18,27 +19,29 @@ export type Product = {
 export const products: Product[] = [
   {
     id: 1,
-    name: "Sidetrack T-Shirt",
-    price: 25.00,
+    name: "SDTRCK Trui",
+    price: 30.00,
     category: "Kleding",
-    description: "Klassiek zwart T-shirt met het Sidetrack logo op de rug.",
+    description: "Trui met het SDTRCK logo op de borst en de lineart op de rug.",
     image: "/images/merch/trui.jpg",
+    images: ["/images/merch/trui.jpg", "/images/gallery/photo-00.jpg", "/images/gallery/photo-01.jpg"],
     sizes: [
-      { size: "XS", enabled: false },
+      { size: "XS", enabled: true },
       { size: "S",  enabled: true },
       { size: "M",  enabled: true },
-      { size: "L",  enabled: false },
+      { size: "L",  enabled: true },
       { size: "XL", enabled: true },
       { size: "XXL",enabled: true },
     ],
   },
   {
     id: 2,
-    name: "Sidetrack Trui",
-    price: 45.00,
+    name: "SDTRCK T-Shirt",
+    price: 20.00,
     category: "Kleding",
-    description: "Warme trui met Sidetrack logo op de rug.",
+    description: "T-shirt met SDTRCK logo op de borst en de lineart op de rug.",
     image: "/images/merch/trui.jpg",
+    images: ["/images/merch/trui.jpg", "/images/gallery/photo-02.jpg", "/images/gallery/photo-03.jpg"],
     sizes: [
       { size: "XS", enabled: true },
       { size: "S",  enabled: true },
@@ -48,50 +51,27 @@ export const products: Product[] = [
       { size: "XXL",enabled: true },
     ],
   },
-  {
-    id: 3,
-    name: "Sidetrack Cap",
-    price: 20.00,
-    category: "Accessoires",
-    description: "Snapback cap met geborduurd logo. Verstelbare sluiting aan de achterkant.",
-    image: "/images/merch/trui.jpg",
-    sizeNote: "One size fits all",
-  },
+  // {
+  //   id: 3,
+  //   name: "SDTRCK Cap",
+  //   price: 20.00,
+  //   category: "Accessoires",
+  //   description: "Snapback cap met geborduurd logo. Verstelbare sluiting aan de achterkant.",
+  //   image: "/images/merch/trui.jpg",
+  //   images: ["/images/merch/trui.jpg", "/images/gallery/photo-04.jpg", "/images/gallery/photo-05.jpg"],
+  //   sizeNote: "One size fits all",
+  // },
   {
     id: 4,
-    name: "Sidetrack Tote Bag",
-    price: 15.00,
-    category: "Accessoires",
-    description: "Katoenen tas met groot Sidetrack opdruk. Ideaal voor op de markt.",
-    image: "/images/merch/trui.jpg",
-    sizeNote: "Geen maatkeuze nodig",
-  },
-  {
-    id: 5,
-    name: "Sticker Pack",
+    name: "Sidetrack Stickers",
     price: 5.00,
     category: "Accessoires",
-    description: "Set van 5 stickers in verschillende groottes.",
+    description: "Set van 5 stickers met sidetrack logo.",
     image: "/images/merch/trui.jpg",
+    images: ["/images/merch/trui.jpg", "/images/gallery/photo-08.jpg", "/images/gallery/photo-09.jpg"],
     sizeNote: "Geen maatkeuze nodig",
-  },
-  {
-    id: 6,
-    name: "Sidetrack Polo",
-    price: 35.00,
-    category: "Kleding",
-    description: "Stijlvolle polo met subtiel geborduurd logo op de borst.",
-    image: "/images/merch/trui.jpg",
-    sizes: [
-      { size: "XS", enabled: true },
-      { size: "S",  enabled: true },
-      { size: "M",  enabled: true },
-      { size: "L",  enabled: true },
-      { size: "XL", enabled: true },
-      { size: "XXL",enabled: true },
-    ],
     soldOut: true,
-  },
+  }
 ];
 
 export function getProduct(id: number): Product | undefined {
