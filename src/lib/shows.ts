@@ -9,8 +9,7 @@ export type Show = {
 
 export const upcomingShows: Show[] = [
   { date: "30 mei 2026", venue: "Postert Laef", city: "Posterholt", ticketUrl: "https://roerdalelaef.nl/tickets1/" },
-  { date: "28 jun 2026", venue: "Gluren bij de Buren 2026", city: "Herten" },
-  { date: "8 aug 2026", venue: "HEIJ", city: "St. Odilienberg", ticketUrl: "https://www.heijfestival.nl/#tickets", possibly: true },
+  { date: "28 jun 2026", venue: "Gluren bij de Buren 2026", city: "Herten" }
 ];
 
 export const pastShows: Show[] = [
