@@ -9,15 +9,15 @@ export type Video = {
 
 export const videos: Video[] = [
   {
-    youtubeId: "dQw4w9WgXcQ",
-    title: "Sidetrack – Naam Nummer (live)",
+    youtubeId: "tlwSXghBKIM",
+    title: "Gluren bij de Buren (2025)",
+  },
+  {
+    youtubeId: "rRwR1d2oXfo",
+    title: "Acoustic sessions De Spil ",
   },
   {
     youtubeId: "dQw4w9WgXcQ",
-    title: "Sidetrack – Naam Nummer (clip)",
-  },
-  {
-    youtubeId: "dQw4w9WgXcQ",
-    title: "Sidetrack – Naam Nummer (sessie)",
+    title: "Beleef de Smaken - Boshut",
   },
 ];
