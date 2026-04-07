@@ -15,7 +15,7 @@ export default function Members() {
           {members.map((member) => (
             <div key={member.id} className="flex flex-col gap-4">
               <div className="relative aspect-square bg-subtle rounded overflow-hidden">
-                <Image src={member.photo} alt={member.name} fill sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw" className="object-cover" />
+                <Image src={member.photo} alt={member.name} fill sizes="(max-width: 640px) calc(100vw - 32px), (max-width: 1024px) calc(50vw - 32px), 256px" className="object-cover" />
               </div>
               <div>
                 <p className="font-bold text-fg">{member.name}</p>

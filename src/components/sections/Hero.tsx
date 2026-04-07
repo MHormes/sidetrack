@@ -14,7 +14,9 @@ export default function Hero() {
           width={1024}
           height={1394}
           className="w-56 sm:w-80 h-auto"
+          sizes="(max-width: 640px) 224px, 320px"
           priority
+          fetchPriority="high"
         />
 
         <p className="text-lg sm:text-xl text-fg-muted tracking-wide max-w-md">
