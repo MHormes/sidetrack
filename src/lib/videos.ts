@@ -9,15 +9,19 @@ export type Video = {
 
 export const videos: Video[] = [
   {
-    youtubeId: "xxx",
+    youtubeId: "oHJZ6F5vEgE",
     title: "Beleef de Smaken - Boshut",
   },
   {
-    youtubeId: "rRwR1d2oXfo",
+    youtubeId: "v_kOgKuYKXE",
     title: "Acoustic sessions De Spil ",
   },
   {
     youtubeId: "tlwSXghBKIM",
     title: "Gluren bij de Buren (2025)",
+  },
+  {
+    youtubeId: "L39MqKnIHG0",
+    title: "Verjaardagsfeest Herten",
   },
 ];
