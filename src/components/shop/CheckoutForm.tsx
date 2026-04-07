@@ -53,6 +53,8 @@ export default function CheckoutForm() {
   const [emailError, setEmailError] = useState<string | null>(null);
   const [phoneError, setPhoneError] = useState<string | null>(null);
   const [lookupStatus, setLookupStatus] = useState<LookupStatus>("idle");
+  const [termsAccepted, setTermsAccepted] = useState(false);
+  const [termsError, setTermsError] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -161,6 +163,10 @@ export default function CheckoutForm() {
     }
     if (!isValidPhone(form.telefoon)) {
       setPhoneError("Vul een geldig telefoonnummer in.");
+      valid = false;
+    }
+    if (!termsAccepted) {
+      setTermsError(true);
       valid = false;
     }
     if (!valid) return;
@@ -453,6 +459,28 @@ export default function CheckoutForm() {
         <p className="text-xs text-fg-subtle leading-relaxed border border-edge p-4">
           Dit is een pre-order. Betaling vindt plaats na contact met ons over levering. Hier kunnen een aantal dagen overheen gaan.
         </p>
+
+        <div className="flex flex-col gap-1.5">
+          <label className="flex items-start gap-3 cursor-pointer">
+            <input
+              type="checkbox"
+              checked={termsAccepted}
+              onChange={(e) => { setTermsAccepted(e.target.checked); if (e.target.checked) setTermsError(false); }}
+              className="mt-0.5 shrink-0 accent-[var(--color-accent)] w-4 h-4 cursor-pointer"
+            />
+            <span className="text-xs text-fg-muted leading-relaxed">
+              Ik ga akkoord met de{" "}
+              <Link href="/shop/voorwaarden" className="underline hover:text-fg transition-colors" target="_blank">
+                algemene voorwaarden
+              </Link>
+              , waaronder de pre-order voorwaarden en betalingsverplichting bij levering.
+              <span className="text-accent ml-1">*</span>
+            </span>
+          </label>
+          {termsError && (
+            <p className="text-xs text-red-400 pl-7">Je moet akkoord gaan met de voorwaarden om een bestelling te plaatsen.</p>
+          )}
+        </div>
 
         {error && (
           <p className="text-sm text-red-400 border border-red-400/30 px-4 py-3">{error}</p>
