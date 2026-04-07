@@ -17,7 +17,7 @@ const siteUrl = "https://sidetracksounds.nl";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "Sidetrack | Coverband uit Roermond",
+  title: "Sidetrack",
   description: "Altijd Sfeervol, Altijd Sidetrack! Sidetrack is een coverband uit Roermond, Limburg. Bekijk onze shows, foto's en meer.",
   keywords: ["Sidetrack", "coverband", "Roermond", "Limburg", "liveband", "feestband", "evenementen", "Nederland"],
   openGraph: {
