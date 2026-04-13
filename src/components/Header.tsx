@@ -14,9 +14,8 @@ export default function Header() {
   return (
     <header className="bg-base border-b border-edge relative z-50">
       <div className="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2 font-bold text-lg tracking-widest uppercase text-fg">
-          <Image src="/images/logo/logo.png" alt="" width={32} height={32} />
-          Sidetrack
+        <Link href="/" className="flex items-center font-bold text-lg tracking-widest uppercase text-fg">
+          <Image src="/images/logo/logo.png" alt="sidetrack-logo" width={156} height={32} />
         </Link>
 
         {/* Desktop nav */}
