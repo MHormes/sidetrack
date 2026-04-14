@@ -24,28 +24,38 @@ export default function GigDates() {
                 <span className="font-bold text-fg-inverse">{show.venue}</span>
                 <span className="text-fg-inverse-muted">{show.city}</span>
               </div>
-              {show.ticketUrl && !show.possibly && (
-                <a
-                  href={show.ticketUrl}
-                  className="px-5 py-2 bg-accent text-on-accent text-xs font-bold tracking-widest uppercase rounded hover:bg-accent-hover transition-colors"
-                >
-                  Tickets
-                </a>
-              )}
+              <div>
               {show.possibly && (
                 <a
-                  className="px-5 py-2 bg-fg-muted text-on-accent text-xs font-bold tracking-widest uppercase rounded disabled"
+                  className="px-5 py-2 mx-2 bg-fg-muted text-on-accent text-xs font-bold tracking-widest uppercase rounded disabled"
                 >
                   Aanvraag
                 </a>
               )}
               {show.private && (
                 <a
-                  className="px-5 py-2 bg-fg text-on-accent text-xs font-bold tracking-widest uppercase rounded disabled"
+                  className="px-5 py-2 mx-2 bg-fg-muted/30 text-on-accent text-xs font-bold tracking-widest uppercase rounded disabled"
                 >
                   Besloten show
                 </a>
               )}
+              {show.ticketUrl && !show.possibly && !show.private && (
+                <a
+                  href={show.ticketUrl}
+                  className="px-5 py-2 mx-2 bg-accent text-on-accent text-xs font-bold tracking-widest uppercase rounded hover:bg-accent-hover transition-colors"
+                >
+                  Tickets
+                </a>
+              )}
+              {show.infoUrl && !show.possibly && !show.private && (
+                <a
+                  href={show.infoUrl}
+                  className="px-5 py-2 mx-2 bg-accent/50 text-on-accent text-xs font-bold tracking-widest uppercase rounded hover:bg-accent-hover transition-colors"
+                >
+                  Informatie
+                </a>
+              )}
+              </div>
             </div>
           ))}
         </div>
