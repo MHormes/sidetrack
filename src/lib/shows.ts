@@ -9,7 +9,7 @@ export type Show = {
 };
 
 export const upcomingShows: Show[] = [
-  { date: "10 mei 2026 13u-15u", venue: "Venhof", city: "Herkenbosch", infoUrl: "" },
+  { date: "10 mei 2026 13u-15u", venue: "Venhof", city: "Herkenbosch", infoUrl: "https://www.instagram.com/p/DXH67I_CGOF/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" },
   { date: "30 mei 2026 15.30-16.15", venue: "Postert Laef", city: "Posterholt", ticketUrl: "https://roerdalelaef.nl/tickets1/", infoUrl: "https://roerdalelaef.nl" },
   { date: "28 jun 2026 n.t.b.", venue: "Gluren bij de Buren 2026", city: "Herten", infoUrl: "https://www.glurenbijdeburen.nl/" },
  ];
