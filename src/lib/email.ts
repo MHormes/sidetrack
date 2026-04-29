@@ -3,7 +3,7 @@ import { Resend } from "resend";
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 const FROM_EMAIL = process.env.RESEND_FROM_EMAIL ?? "noreply@sidetracksounds.nl";
-const NOTIFICATION_EMAIL = process.env.NOTIFICATION_EMAIL ?? "sidetrack.roermond@gmail.com";
+const NOTIFICATION_EMAIL = process.env.NOTIFICATION_EMAIL ?? "bestellingen@sidetracksounds.nl";
 
 type Customer = {
   naam: string;

@@ -4,7 +4,7 @@ import { Mail } from "lucide-react";
 const contact = {
   instagram: { handle: "@sidetrack.sounds", url: "https://www.instagram.com/sidetrack.sounds/" },
   facebook:  { handle: "Sidetrack", url: "https://www.facebook.com/people/sidetracksounds/61579899760309/" },
-  email:     { display: "sidetrack.roermond@gmail.com", url: "mailto:sidetrack.roermond@gmail.com" },
+  email:     { display: "info@sidetracksounds.nl", url: "mailto:info@sidetracksounds.nl" },
 };
 
 export default function Contact() {
