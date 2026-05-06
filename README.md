@@ -21,31 +21,8 @@ Sidetrack is the official web presence for the Dutch band Sidetrack — a fast-l
 | ORM       | Drizzle ORM                          |
 | Hosting   | Docker · Cloudflare Tunnel           |
 
-## Running the App
+## License
 
-There are three ways to run Sidetrack:
+Copyright (c) 2026 Maarten Hormes. All rights reserved.
 
-| Mode           | Description                                                                                                                       |
-| -------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| **Dev**        | Recommended for day-to-day development. Runs with SQLite — no Docker or external services needed.                                 |
-| **Local**      | Full containerized stack (Next.js app + PostgreSQL) via `compose.local.yml`. Closest to production without the Cloudflare tunnel. |
-| **Production** | Server deployment via `compose.yaml`. Adds a Cloudflare Tunnel container for public HTTPS access via `sidetracksounds.nl`.        |
-
-For setup instructions, environment variables, aliases, and the nightly backup cron job see [RUNNING.md](RUNNING.md).
-
-## Database
-
-The schema has two tables — `products` and `preorders`. Migrations are managed by Drizzle Kit and run automatically on every server startup via `src/instrumentation.ts`.
-
-Initial product data is loaded via the CSV seeder:
-
-```bash
-pnpm db:seed          # first-run setup (skips if data already exists)
-pnpm db:seed:force    # restore mode — upserts from database/data/*.csv
-```
-
-## Branch Strategy
-
-| Branch | Purpose                                                       |
-| ------ | ------------------------------------------------------------- |
-| `main` | Production-ready — deployed via `scripts/setup.sh production` |
+This repository is for portfolio review and demonstration purposes only. No permission is granted to copy, distribute, or modify the software. See the [LICENSE](LICENSE) file for full details.
