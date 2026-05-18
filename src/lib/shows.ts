@@ -10,7 +10,7 @@ export type Show = {
 
 export const upcomingShows: Show[] = [
   { date: "30 mei 2026 15.30-16.15", venue: "Postert Laef", city: "Posterholt", ticketUrl: "https://roerdalelaef.nl/tickets1/", infoUrl: "https://roerdalelaef.nl" },
-  { date: "20 jun 2026 n.t.b.", venue: "The Movement (Cultuurnacht)", city: "Roermond" },
+  { date: "20 jun 2026 19.00-19.45", venue: "Munsterplein (Cultuurnacht)", city: "Roermond" },
   { date: "28 jun 2026 n.t.b.", venue: "Gluren bij de Buren 2026", city: "Herten", infoUrl: "https://www.glurenbijdeburen.nl/" },
  ];
 

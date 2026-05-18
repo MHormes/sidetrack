@@ -9,6 +9,7 @@ const links = [
   { href: "/#band", label: "Band" },
   { href: "/#videos", label: "Video's" },
   { href: "/#contact", label: "Contact" },
+  // { href: "/shop", label: "Shop", accent: true },
 ];
 
 export default function BurgerMenu() {
@@ -28,8 +29,8 @@ export default function BurgerMenu() {
 
       {open && (
         <nav className="sm:hidden border-t border-edge bg-base px-4 py-4 flex flex-col gap-4 text-sm font-medium text-fg-muted absolute top-full left-0 right-0 z-50">
-          {links.map(({ href, label }) => (
-            <Link key={href} href={href} className="hover:text-fg transition-colors" onClick={() => setOpen(false)}>
+          {links.map(({ href, label, accent }) => (
+            <Link key={href} href={href} className={accent ? "text-accent hover:text-accent transition-colors" : "hover:text-fg transition-colors"} onClick={() => setOpen(false)}>
               {label}
             </Link>
           ))}

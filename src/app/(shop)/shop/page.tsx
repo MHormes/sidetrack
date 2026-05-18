@@ -80,7 +80,7 @@ export default function ShopPage() {
                 <span className="text-xs font-mono tracking-widest uppercase text-accent">
                   {product.category}
                 </span>
-                <p className="font-bold text-fg text-sm sm:text-base leading-snug">
+                <p className="font-bold text-sm sm:text-base leading-snug" style={{color: '#f5f2ef'}}>
                   {product.name}
                 </p>
                 <p className="text-xs text-fg-subtle leading-relaxed hidden sm:block">

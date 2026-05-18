@@ -97,8 +97,8 @@ export default async function ProductPage({
               €{product.price.toFixed(2)}
             </p>
 
-            <p className="text-fg-muted leading-relaxed">
-              {product.description}
+            <p className="text-fg-muted leading-relaxed whitespace-pre-wrap">
+              {product.detailedDescription ?? product.description}
             </p>
 
             <div className="border-t border-edge pt-6">
