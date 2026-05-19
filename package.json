@@ -25,7 +25,8 @@
       "@img/sharp-linuxmusl-x64",
       "better-sqlite3",
       "esbuild",
-      "sharp"
+      "sharp",
+      "unrs-resolver"
     ]
   },
   "dependencies": {
