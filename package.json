@@ -17,18 +17,6 @@
     "db:seed": "dotenv -e .env.local -- tsx scripts/seed.ts",
     "db:seed:force": "dotenv -e .env.local -- tsx scripts/seed.ts --force"
   },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "@img/sharp-libvips-linuxmusl-arm64",
-      "@img/sharp-libvips-linuxmusl-x64",
-      "@img/sharp-linuxmusl-arm64",
-      "@img/sharp-linuxmusl-x64",
-      "better-sqlite3",
-      "esbuild",
-      "sharp",
-      "unrs-resolver"
-    ]
-  },
   "dependencies": {
     "better-sqlite3": "^12.8.0",
     "drizzle-orm": "^0.45.2",
