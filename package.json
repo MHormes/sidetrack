@@ -19,8 +19,13 @@
   },
   "pnpm": {
     "onlyBuiltDependencies": [
+      "@img/sharp-libvips-linuxmusl-arm64",
+      "@img/sharp-libvips-linuxmusl-x64",
+      "@img/sharp-linuxmusl-arm64",
+      "@img/sharp-linuxmusl-x64",
       "better-sqlite3",
-      "esbuild"
+      "esbuild",
+      "sharp"
     ]
   },
   "dependencies": {
