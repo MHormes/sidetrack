@@ -15,14 +15,34 @@ export default function Header() {
   return (
     <header className="bg-base border-b border-edge relative z-50">
       <div className="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
-        <Link href="/" className="flex items-center font-bold text-lg tracking-widest uppercase text-fg">
-          <Image src="/images/logo/logo.png" alt="sidetrack-logo" width={156} height={32} />
+        <Link
+          href="/"
+          className="flex items-center font-bold text-lg tracking-widest uppercase text-fg"
+        >
+          <Image
+            src="/images/logo/logo.png"
+            alt="sidetrack-logo"
+            width={156}
+            height={32}
+          />
         </Link>
 
         {/* Desktop nav */}
-        <nav className="hidden sm:flex gap-6 text-sm font-medium text-fg-muted">
+        {/* <nav className="hidden sm:flex gap-6 text-sm font-medium text-fg-muted">
           {links.map(({ href, label, accent }) => (
             <Link key={href} href={href} className={accent ? "text-accent hover:text-accent transition-colors" : "hover:text-fg transition-colors"}>{label}</Link>
+          ))}
+        </nav> */}
+
+        <nav className="hidden sm:flex gap-6 text-sm font-medium text-fg-muted">
+          {links.map(({ href, label }) => (
+            <Link
+              key={href}
+              href={href}
+              className="hover:text-fg transition-colors"
+            >
+              {label}
+            </Link>
           ))}
         </nav>
 
