@@ -6,6 +6,7 @@ cd "$(dirname "$0")/.."
 
 # 1. Bepaal het profiel (standaard 'dev')
 PROFILE=${1:-dev}
+NO_CACHE=${2:-}
 
 echo "🌟 Sidetrack setup — profiel: $PROFILE"
 
@@ -120,7 +121,10 @@ elif [ "$PROFILE" = "production" ]; then
     docker compose -f docker-compose.yaml down
 
     echo "🚀 Bouwen en opstarten..."
-    docker compose -f docker-compose.yaml --env-file "$ENV_SOURCE" up -d --build
+    CACHE_FLAG=""
+    [ "$NO_CACHE" = "--no-cache" ] && CACHE_FLAG="--no-cache"
+    docker compose -f docker-compose.yaml --env-file "$ENV_SOURCE" build $CACHE_FLAG
+    docker compose -f docker-compose.yaml --env-file "$ENV_SOURCE" up -d
 
     toggle_maintenance "off"
 
