@@ -135,10 +135,11 @@ Shell aliases are configured on both the laptop and the server to speed up commo
 
 ### Server Aliases
 
-| Alias         | Description                                 |
-| ------------- | ------------------------------------------- |
-| `side-pull`   | Pull the latest changes from Git.           |
-| `side-deploy` | Run `setup.sh` and deploy the current pull. |
+| Alias         | Description                                                |
+| ------------- | ---------------------------------------------------------- |
+| `side-pull`   | Pull the latest changes from Git.                          |
+| `side-deploy` | Run `setup.sh` and deploy the current pull.                |
+| `side-backup` | Run `backup.sh` and export current data to backups folder. |
 
 ### Server Cron Job
 

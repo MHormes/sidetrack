@@ -25,8 +25,8 @@ export const products: Product[] = [
     category: "Kleding",
     description: "Trui met het SDTRCK logo op de borst en de lineart op de rug.",
     detailedDescription: "Trui met het SDTRCK logo op de borst en de lineart op de rug.\nMax draagt maat XL en is 1.83m lang.\nLisa draagt maat S en is 1.63m lang.",
-    image: "/images/merch/trui.jpg",
-    images: ["/images/merch/trui.jpg", "/images/gallery/photo-00.jpg", "/images/gallery/photo-01.jpg"],
+    image: "/images/merch/trui_groep.jpg",
+    images: ["/images/merch/trui_max_front.jpg", "/images/merch/trui_max_back.jpg", "/images/merch/trui_groep.jpg", "/images/merch/trui_groep_arms.jpg"],
     sizes: [
       { size: "S",  enabled: true },
       { size: "M",  enabled: true },
@@ -42,8 +42,8 @@ export const products: Product[] = [
     category: "Kleding",
     description: "T-shirt met SDTRCK logo op de borst en de lineart op de rug.",
     detailedDescription: "T-shirt met SDTRCK logo op de borst en de lineart op de rug.\nLisa draagt maat S en is 1.63m lang.\nMax draagt maat XL en is 1.83m lang.",
-    image: "/images/merch/trui.jpg",
-    images: ["/images/merch/trui.jpg", "/images/gallery/photo-02.jpg", "/images/gallery/photo-03.jpg"],
+    image: "/images/merch/shirt_groep_front.jpg",
+    images: ["/images/merch/shirt_lisa_front.jpg", "/images/merch/shirt_lisa_back.jpg", "/images/merch/shirt_groep_front.jpg", "/images/merch/shirt_lisa_fix.jpg"],
     sizes: [
       { size: "S",  enabled: true },
       { size: "M",  enabled: true },
