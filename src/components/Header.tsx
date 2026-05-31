@@ -8,7 +8,7 @@ const links = [
   { href: "/#band", label: "Band" },
   { href: "/#videos", label: "Video's" },
   { href: "/#contact", label: "Contact" },
-  // { href: "/shop", label: "Shop", accent: true },
+  { href: "/shop", label: "Shop", accent: true },
 ];
 
 export default function Header() {
@@ -28,18 +28,16 @@ export default function Header() {
         </Link>
 
         {/* Desktop nav */}
-        {/* <nav className="hidden sm:flex gap-6 text-sm font-medium text-fg-muted">
-          {links.map(({ href, label, accent }) => (
-            <Link key={href} href={href} className={accent ? "text-accent hover:text-accent transition-colors" : "hover:text-fg transition-colors"}>{label}</Link>
-          ))}
-        </nav> */}
-
         <nav className="hidden sm:flex gap-6 text-sm font-medium text-fg-muted">
-          {links.map(({ href, label }) => (
+          {links.map(({ href, label, accent }) => (
             <Link
               key={href}
               href={href}
-              className="hover:text-fg transition-colors"
+              className={
+                accent
+                  ? "text-accent hover:text-accent transition-colors"
+                  : "hover:text-fg transition-colors"
+              }
             >
               {label}
             </Link>

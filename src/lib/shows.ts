@@ -9,12 +9,12 @@ export type Show = {
 };
 
 export const upcomingShows: Show[] = [
-  { date: "30 mei 2026 15.30-16.15", venue: "Postert Laef", city: "Posterholt", ticketUrl: "https://roerdalelaef.nl/tickets1/", infoUrl: "https://roerdalelaef.nl" },
   { date: "20 jun 2026 19.00-19.45", venue: "Munsterplein (Cultuurnacht)", city: "Roermond" },
-  { date: "28 jun 2026 n.t.b.", venue: "Gluren bij de Buren 2026", city: "Herten", infoUrl: "https://www.glurenbijdeburen.nl/" },
+  { date: "28 jun 2026 13.45, 15.15 & 16.45", venue: "Gluren bij de Buren 2026", city: "Herten", infoUrl: "https://www.glurenbijdeburen.nl/" },
  ];
 
 export const pastShows: Show[] = [
+  { date: "30 mei 2026 15.30-16.15", venue: "Postert Laef", city: "Posterholt", ticketUrl: "https://roerdalelaef.nl/tickets1/", infoUrl: "https://roerdalelaef.nl" },
   { date: "10 mei 2026", venue: "Venhof", city: "Herkenbosch", infoUrl: "https://www.instagram.com/p/DXH67I_CGOF/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" },
   { date: "22 mar 2026", venue: "De Boshut", city: "Herkenbosch" },
   { date: "07 nov 2025", venue: "De Spil", city: "Maasbracht" },
