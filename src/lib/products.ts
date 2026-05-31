@@ -42,8 +42,8 @@ export const products: Product[] = [
     category: "Kleding",
     description: "T-shirt met SDTRCK logo op de borst en de lineart op de rug.",
     detailedDescription: "T-shirt met SDTRCK logo op de borst en de lineart op de rug.\nLisa draagt maat S en is 1.63m lang.\nMax draagt maat XL en is 1.83m lang.",
-    image: "/images/merch/shirt_groep_front.jpg",
-    images: ["/images/merch/shirt_lisa_front.jpeg", "/images/merch/shirt_lisa_back.jpeg", "/images/merch/shirt_groep_front.jpg", "/images/merch/shirt_lisa_fix.jpeg"],
+    image: "/images/merch/shirt_groep_front.JPG",
+    images: ["/images/merch/shirt_lisa_front.jpeg", "/images/merch/shirt_lisa_back.jpeg", "/images/merch/shirt_groep_front.JPG", "/images/merch/shirt_lisa_fix.jpeg"],
     sizes: [
       { size: "S",  enabled: true },
       { size: "M",  enabled: true },
