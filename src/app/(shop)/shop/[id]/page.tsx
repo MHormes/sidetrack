@@ -6,6 +6,7 @@ import { products, getProduct } from "@/lib/products";
 import SizeSelector from "@/components/shop/SizeSelector";
 import AddToCartButton from "@/components/shop/AddToCartButton";
 import ProductCarousel from "@/components/shop/ProductCarousel";
+import PreOrderBanner from "@/components/shop/PreOrderBanner";
 
 export async function generateMetadata({
   params,
@@ -116,6 +117,8 @@ export default async function ProductPage({
 
           </div>
         </div>
+
+        <PreOrderBanner className="mt-16" />
       </div>
     </div>
   );

@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "@/context/cart";
+import PreOrderBanner from "./PreOrderBanner";
 
 type FormData = {
   naam: string;
@@ -485,6 +486,8 @@ export default function CheckoutForm() {
         {error && (
           <p className="text-sm text-red-400 border border-red-400/30 px-4 py-3">{error}</p>
         )}
+
+        <PreOrderBanner />
 
         <button
           type="submit"

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { products } from "@/lib/products";
+import PreOrderBanner from "@/components/shop/PreOrderBanner";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/shop" },
@@ -10,7 +11,6 @@ export const metadata: Metadata = {
 export default function ShopPage() {
   return (
     <div className="bg-base min-h-screen">
-
       {/* Hero */}
       <section className="relative bg-base overflow-hidden flex items-center justify-center py-20 px-4">
         <div className="absolute inset-0 bg-gradient-to-b from-elevated to-base" />
@@ -31,20 +31,20 @@ export default function ShopPage() {
 
       {/* Product grid */}
       <section className="max-w-5xl mx-auto px-4 py-16">
-
         <div className="flex items-end justify-between mb-10">
           <div>
             <h2 className="text-3xl font-black tracking-widest uppercase text-fg mb-1">
               Collectie
             </h2>
-            <p className="text-fg-subtle text-sm">{products.length} producten</p>
+            <p className="text-fg-subtle text-sm">
+              {products.length} producten
+            </p>
           </div>
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-6">
           {products.map((product) => (
             <div key={product.id} className="flex flex-col group">
-
               {/* Image */}
               <div className="relative aspect-square bg-subtle overflow-hidden mb-3">
                 {product.image ? (
@@ -80,7 +80,10 @@ export default function ShopPage() {
                 <span className="text-xs font-mono tracking-widest uppercase text-accent">
                   {product.category}
                 </span>
-                <p className="font-bold text-sm sm:text-base leading-snug" style={{color: '#f5f2ef'}}>
+                <p
+                  className="font-bold text-sm sm:text-base leading-snug"
+                  style={{ color: "#f5f2ef" }}
+                >
                   {product.name}
                 </p>
                 <p className="text-xs text-fg-subtle leading-relaxed hidden sm:block">
@@ -101,7 +104,6 @@ export default function ShopPage() {
                   Bestellen
                 </Link>
               </div>
-
             </div>
           ))}
         </div>
@@ -110,14 +112,22 @@ export default function ShopPage() {
         <div className="mt-16 border border-edge p-6 text-fg-muted text-sm leading-relaxed">
           <p>
             <span className="font-bold text-fg">Let op: </span>
-            De huidige webshop werkt puur met pre-orders. In plaats van betaling wordt de bestelling afgerond met het invoeren van persoonlijke gegevens. Deze zullen wij gebruiken om contact op te nemen over betaling &amp; levering. Hier kunnen een aantal dagen overheen gaan. Bij vragen, voel je vrij ons te{" "}
-            <a href="/#contact" className="text-accent hover:text-accent-hover underline underline-offset-2 transition-colors">
+            De huidige webshop werkt puur met pre-orders. In plaats van betaling
+            wordt de bestelling afgerond met het invoeren van persoonlijke
+            gegevens. Deze zullen wij gebruiken om contact op te nemen over
+            betaling &amp; levering. Hier kunnen een aantal dagen overheen gaan.
+            Bij vragen, voel je vrij ons te{" "}
+            <a
+              href="/#contact"
+              className="text-accent hover:text-accent-hover underline underline-offset-2 transition-colors"
+            >
               contacteren
             </a>
             !
           </p>
         </div>
 
+        <PreOrderBanner className="mt-4" />
       </section>
     </div>
   );
