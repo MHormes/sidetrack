@@ -127,11 +127,11 @@ Shell aliases are configured on both the laptop and the server to speed up commo
 
 ### Laptop Aliases
 
-| Alias          | Description                                          |
-| -------------- | ---------------------------------------------------- |
-| `side-connect` | Open an SSH connection to the Proxmox server.        |
-| `side-data`    | Copies the backup folder to the desktop.             |
-| `side-start`   | Build and start the local Docker stack (PostgreSQL). |
+| Alias          | Description                                                                                                                                  |
+| -------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| `side-connect` | Open an SSH connection to the Sidetrack VM.                                                                                                  |
+| `side-data`    | Runs `scripts/copy_backup.sh` — SSHs in, finds the latest backup, confirms, downloads it to `~/Desktop/SidetrackBackups/`. Optionally stages `csv/` into `database/data/` for a local Docker seed. |
+| `side-up`      | Build and start the local Docker stack (PostgreSQL) via `scripts/setup.sh local`.                                                            |
 
 ### Server Aliases
 
@@ -141,9 +141,39 @@ Shell aliases are configured on both the laptop and the server to speed up commo
 | `side-deploy` | Run `setup.sh` and deploy the current pull.                |
 | `side-backup` | Run `backup.sh` and export current data to backups folder. |
 
-### Server Cron Job
+### VM OS Updates
 
-The `backup.sh` script runs automatically every night at **02:00** via a server cron job.
+`scripts/vm-update.sh` automates the monthly OS update cycle. Run it from the project root on the server:
+
+```bash
+sudo bash scripts/vm-update.sh
+```
+
+It runs `apt update && apt upgrade -y`. If a kernel update requires a reboot, it automatically enables the Cloudflare maintenance page via `scripts/maintenance-on.sh` before rebooting. If no reboot is needed, it exits cleanly with zero downtime.
+
+After a reboot the Docker containers come back up automatically (`restart: unless-stopped`). The `@reboot` cron entry below re-disables maintenance mode once the system is back.
+
+### Cloudflare Maintenance Scripts
+
+Three helper scripts in `scripts/` manage the Cloudflare maintenance page independently of deployment:
+
+| Script | Purpose |
+| --- | --- |
+| `scripts/maintenance-on.sh` | Creates a Cloudflare Worker route that serves the maintenance page |
+| `scripts/maintenance-off.sh` | Deletes the Worker route, restoring normal traffic |
+| `scripts/utils.sh` | Sourced by the above; loads `.env.production` and derives domain + worker name |
+
+These are also called by `scripts/setup.sh production` around the build/restart cycle.
+
+### Server Cron Jobs
+
+```cron
+# Nightly database backup at 02:00
+0 2 * * * /path/to/sidetrack/scripts/backup.sh
+
+# Re-enable site after a VM reboot triggered by vm-update.sh
+@reboot sleep 30 && /path/to/sidetrack/scripts/maintenance-off.sh
+```
 
 The backup creates a timestamped folder under `backups/` containing:
 
