@@ -1,0 +1,20 @@
+id,naam,email,telefoon,straat,postcode,stad,opmerking,status,created_at
+1,Manon Hormes,Manon.hormes@gmail.com,+31 650904746,Sint Christoffelstraat 2a,6041JS,Roermond,"Geef me de bestelling maar zo, geen verzendkosten hehe",pending,2026-05-30 17:27:05.215417
+2,Ralph Pouls,ralphpouls@outlook.com,+31 642012147,Wilhelminalaan 44,6042EN,Roermond,Persoonlijk afleveren.,pending,2026-05-30 19:23:44.422651
+3,Jeroen Op het Veld,jeroenohv@gmail.com,+31 619517433,Sophiaweg  148  K7,6523 NJ,Nijmegen ,"",pending,2026-05-30 19:31:45.452393
+4,Joy Schmitz ,joyschmitz@ziggo.nl,+31 651451978,Begijnhofstraat 23,6041GW,Roermond,"",pending,2026-05-31 12:22:48.580683
+5,Jordy van der Varst ,jordyvander12@gmail.com,+31 0642835779,Rector van den Boornlaan 18,6061AR,Posterholt,"",pending,2026-05-31 12:41:07.299058
+6,Imke Venbrucx,imkevenbrucx@icloud.com,+31 617013678,Daalplein 9,6097EG,Heel,"",pending,2026-05-31 15:40:24.534746
+7,Francois Ruijten,francois.ruijten@gmail.com,+31 655872294,Scheidingsweg 52,6045 CS,Roermond,"",pending,2026-06-01 13:40:20.296198
+8,Manon Olde,manon.olde@gmail.com,+31 619457304,Zwartbroekstraat  39B,6041 JL,Roermond,"",pending,2026-06-01 16:22:52.885205
+9,Nicole Ruijten,voornicole@hotmail.com,+31 638093896,Aan de Dijk 154B6,6049MB,Herten,"",pending,2026-06-02 17:47:13.415911
+10,Hen Verberkt,baarlosehbjean@hotmail.com,+31 618449184,Aan de Dijk 154B6,6049MB,Herten,"",pending,2026-06-02 19:26:19.408912
+11,S.L. Hormes-Schuurmans,sonja.hormes2@gmail.com,+31 064893776,De Eerensstraat 2,6045 HB,Roermond,"",pending,2026-06-06 11:45:05.149511
+12,Romy,romypouls04@gmail.com,+31 0638462578,Wilhelminalaan 44,6042EN,Roermond,"",pending,2026-06-06 16:39:53.449964
+13,Danielle Min,dmgmin@gmail.com,+31 681087886,Veestraat 12a,6077GG,Sint Odiliënberg,Loefs van jullie biggest fangirl 🫶🏼 ps. wanneer komen er kittenmaatjes? Moos is ook geïnteresseerd. ,pending,2026-06-07 14:45:59.831837
+14,Jolie van de Mortel,jolie.vandemortel@gmail.com,+31 683908839,Dorpsstraat 11,6097AL,Heel,Love you sjatjes,pending,2026-06-08 12:26:04.952293
+15,Anouk Joosten ,joolemm@kpnplanet.nl,+31 636508882,dokter E.Verstraelenstraat 3,6097CJ ,Heel,"",pending,2026-06-08 17:23:21.961555
+16,Marco Hormes ,Marco.hormes@gmail.com,+31 630200470,De Eerensstraat 2,6045HB,Roermond,"",pending,2026-06-08 20:35:22.306126
+17,Sanne Boots,sanneboots2@gmail.com,+31 620711508,Kapellerhof 45,6045DB,Roermond,"",pending,2026-06-10 13:08:07.584861
+18,Niels Verdonschot ,niels1verdonschot@gmail.com,+31 613532041,Nieuwebaan 20,6035 RD,Ospel,"",pending,2026-06-10 13:10:57.720508
+19,Roy Timmermans,thesemster@gmail.com,+31 639430475,Beeselseweg 26,6071PM,Swalmen,Deze informatie woor al allemaol bekend,pending,2026-06-10 21:32:51.043807
