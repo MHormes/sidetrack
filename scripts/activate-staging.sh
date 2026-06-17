@@ -30,7 +30,7 @@ echo "  URL    : $APP_URL_STAGING"
 echo ""
 echo "Restarting Docker Compose..."
 cd "$SCRIPT_DIR/.."
-docker compose down
-docker compose up -d
+docker compose -f docker-compose.yaml down
+docker compose -f docker-compose.yaml --env-file "$ENV_FILE" up -d
 echo ""
 echo "Done. Staging running at $APP_URL_STAGING"
