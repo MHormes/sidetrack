@@ -1,7 +1,7 @@
 import { Resend } from "resend";
 import nodemailer from "nodemailer";
 
-const EMAIL_PROVIDER = process.env.EMAIL_PROVIDER ?? "resend";
+const EMAIL_PROVIDER = process.env["EMAIL_PROVIDER"] ?? "mailtrap";
 
 const FROM_EMAIL = process.env.FROM_EMAIL ?? process.env.RESEND_FROM_EMAIL ?? "noreply@sidetracksounds.nl";
 const NOTIFICATION_EMAIL = process.env.NOTIFICATION_EMAIL ?? "bestellingen@sidetracksounds.nl";

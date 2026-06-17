@@ -31,6 +31,6 @@ echo ""
 echo "Restarting Docker Compose..."
 cd "$SCRIPT_DIR/.."
 docker compose -f docker-compose.yaml down
-docker compose -f docker-compose.yaml --env-file "$ENV_FILE" up -d
+docker compose -f docker-compose.yaml --env-file "$ENV_FILE" up -d --build
 echo ""
 echo "Done. Staging running at $APP_URL_STAGING"
