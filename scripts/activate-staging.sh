@@ -19,13 +19,15 @@ source <(grep -v '^#' "$ENV_FILE" | grep '=')
 
 sed -i \
     -e "s|^CLOUDFLARE_TUNNEL_TOKEN=.*|CLOUDFLARE_TUNNEL_TOKEN=$CLOUDFLARE_TUNNEL_TOKEN_STAGING|" \
-    -e "s|^EMAIL_PROVIDER=.*|EMAIL_PROVIDER=mailtrap|" \
+    -e "s|^EMAIL_PROVIDER=.*|EMAIL_PROVIDER=disabled|" \
     -e "s|^APP_URL=.*|APP_URL=$APP_URL_STAGING|" \
+    -e "s|^NEXT_PRIVATE_SKIP_FETCH_CACHE=.*|NEXT_PRIVATE_SKIP_FETCH_CACHE=1|" \
     "$ENV_FILE"
 
 echo "Switched to staging config."
 echo "  Tunnel : staging"
-echo "  Email  : mailtrap"
+echo "  Email  : disabled"
+echo "  Cache  : disabled"
 echo "  URL    : $APP_URL_STAGING"
 echo ""
 echo "Restarting Docker Compose..."

@@ -220,9 +220,9 @@ type EmailMessage = {
 };
 
 async function sendEmail(msg: EmailMessage): Promise<void> {
+  if (EMAIL_PROVIDER === "disabled") return;
   if (EMAIL_PROVIDER === "mailtrap") {
-    const transport = mailtrapTransport();
-    await transport.sendMail(msg);
+    await mailtrapTransport().sendMail(msg);
   } else {
     await resend!.emails.send(msg);
   }
