@@ -1,9 +1,23 @@
 import { Resend } from "resend";
+import nodemailer from "nodemailer";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const EMAIL_PROVIDER = process.env.EMAIL_PROVIDER ?? "resend";
 
-const FROM_EMAIL = process.env.RESEND_FROM_EMAIL ?? "noreply@sidetracksounds.nl";
+const FROM_EMAIL = process.env.FROM_EMAIL ?? process.env.RESEND_FROM_EMAIL ?? "noreply@sidetracksounds.nl";
 const NOTIFICATION_EMAIL = process.env.NOTIFICATION_EMAIL ?? "bestellingen@sidetracksounds.nl";
+
+const resend = EMAIL_PROVIDER === "resend" ? new Resend(process.env.RESEND_API_KEY) : null;
+
+function mailtrapTransport() {
+  return nodemailer.createTransport({
+    host: "sandbox.smtp.mailtrap.io",
+    port: 2525,
+    auth: {
+      user: process.env.MAILTRAP_USER,
+      pass: process.env.MAILTRAP_PASS,
+    },
+  });
+}
 
 type Customer = {
   naam: string;
@@ -198,6 +212,22 @@ function bandEmailHtml(orderId: number, customer: Customer, items: OrderItem[]):
 </html>`;
 }
 
+type EmailMessage = {
+  from: string;
+  to: string;
+  subject: string;
+  html: string;
+};
+
+async function sendEmail(msg: EmailMessage): Promise<void> {
+  if (EMAIL_PROVIDER === "mailtrap") {
+    const transport = mailtrapTransport();
+    await transport.sendMail(msg);
+  } else {
+    await resend!.emails.send(msg);
+  }
+}
+
 export async function sendOrderEmails(
   orderId: number,
   customer: Customer,
@@ -205,13 +235,13 @@ export async function sendOrderEmails(
 ): Promise<void> {
   try {
     await Promise.all([
-      resend.emails.send({
+      sendEmail({
         from: FROM_EMAIL,
         to: customer.email,
         subject: `Bestelling #${orderId} ontvangen — Sidetrack`,
         html: customerEmailHtml(orderId, customer, items),
       }),
-      resend.emails.send({
+      sendEmail({
         from: FROM_EMAIL,
         to: NOTIFICATION_EMAIL,
         subject: `Nieuwe bestelling #${orderId} — ${customer.naam}`,
