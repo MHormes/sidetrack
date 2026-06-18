@@ -7,9 +7,11 @@ const BASE_URL = __ENV.BASE_URL || "https://staging.sidetracksounds.nl";
 
 export const options = {
   stages: [
-    { duration: "2m", target: 25 },  // start with 25 users
-    { duration: "3m",  target: 25 },  // hold
-    { duration: "30s", target: 0 },  // ramp down
+    { duration: "2m",  target: 100 },  // ramp to 100
+    { duration: "2m",  target: 250 },  // ramp to 250
+    { duration: "2m",  target: 500 },  // ramp to 500
+    { duration: "3m",  target: 500 },  // hold at 500
+    { duration: "30s", target: 0   },  // ramp down
   ],
   thresholds: {
     http_req_failed:   ["rate<0.01"],      // <1% errors
