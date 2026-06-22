@@ -2,20 +2,30 @@ import { FaInstagram, FaFacebook } from "react-icons/fa";
 import { Mail } from "lucide-react";
 
 const contact = {
-  instagram: { handle: "@sidetrack.sounds", url: "https://www.instagram.com/sidetrack.sounds/" },
-  facebook:  { handle: "Sidetrack", url: "https://www.facebook.com/people/sidetracksounds/61579899760309/" },
-  email:     { display: "info@sidetracksounds.nl", url: "mailto:info@sidetracksounds.nl" },
+  instagram: {
+    handle: "@sidetrack.sounds",
+    url: "https://www.instagram.com/sidetrack.sounds/",
+  },
+  facebook: {
+    handle: "SideTrack",
+    url: "https://www.facebook.com/people/sidetracksounds/61579899760309/",
+  },
+  email: {
+    display: "info@sidetracksounds.nl",
+    url: "mailto:info@sidetracksounds.nl",
+  },
 };
 
 export default function Contact() {
   return (
     <section id="contact" className="bg-elevated py-24 px-4">
       <div className="max-w-5xl mx-auto">
-
         <h2 className="text-3xl font-black tracking-widest uppercase text-fg mb-2">
           Contact
         </h2>
-        <p className="text-fg-subtle mb-12">Neem contact op voor boekingen of vragen.</p>
+        <p className="text-fg-subtle mb-12">
+          Neem contact op voor boekingen of vragen.
+        </p>
 
         <div className="flex flex-col sm:flex-row gap-8 sm:gap-16 pl-4 sm:pl-0">
           <a
@@ -46,7 +56,6 @@ export default function Contact() {
             <span className="font-medium">{contact.email.display}</span>
           </a>
         </div>
-
       </div>
     </section>
   );

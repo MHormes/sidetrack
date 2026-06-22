@@ -64,7 +64,7 @@ export const products: Product[] = [
   // },
   // {
   //   id: 4,
-  //   name: "Sidetrack Stickers",
+  //   name: "SideTrack Stickers",
   //   price: 5.00,
   //   category: "Accessoires",
   //   description: "Set van 5 stickers met sidetrack logo.",

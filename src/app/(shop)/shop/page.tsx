@@ -17,7 +17,7 @@ export default function ShopPage() {
         <div className="relative z-10 flex flex-col items-center text-center gap-4">
           <Image
             src="/images/logo/fineline.png"
-            alt="Sidetrack"
+            alt="SideTrack"
             width={1024}
             height={1394}
             className="w-32 sm:w-44 h-auto"

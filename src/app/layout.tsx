@@ -17,30 +17,41 @@ const siteUrl = "https://sidetracksounds.nl";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "Sidetrack",
-  description: "Altijd Sfeervol, Altijd Sidetrack! Sidetrack is een coverband uit Roermond, Limburg. Bekijk onze shows, foto's en meer.",
-  keywords: ["Sidetrack", "coverband", "Roermond", "Limburg", "liveband", "feestband", "evenementen", "Nederland"],
+  title: "SideTrack",
+  description:
+    "Altijd Sfeervol, Altijd SideTrack! SideTrack is een coverband uit Roermond, Limburg. Bekijk onze shows, foto's en meer.",
+  keywords: [
+    "SideTrack",
+    "coverband",
+    "Roermond",
+    "Limburg",
+    "liveband",
+    "feestband",
+    "evenementen",
+    "Nederland",
+  ],
   openGraph: {
     type: "website",
     url: siteUrl,
-    siteName: "Sidetrack",
-    title: "Sidetrack",
-    description: "Altijd Sfeervol, Altijd Sidetrack!",
+    siteName: "SideTrack",
+    title: "SideTrack",
+    description: "Altijd Sfeervol, Altijd SideTrack!",
     locale: "nl_NL",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Sidetrack",
-    description: "Altijd Sfeervol, Altijd Sidetrack!",
+    title: "SideTrack",
+    description: "Altijd Sfeervol, Altijd SideTrack!",
   },
 };
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "MusicGroup",
-  name: "Sidetrack",
+  name: "SideTrack",
   url: siteUrl,
-  description: "Altijd Sfeervol, Altijd Sidetrack! Coverband uit Roermond, Limburg.",
+  description:
+    "Altijd Sfeervol, Altijd SideTrack! Coverband uit Roermond, Limburg.",
   genre: ["Cover", "Pop", "Rock"],
   foundingLocation: {
     "@type": "Place",
@@ -87,9 +98,9 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col">
-          {children}
-          <CookieBanner />
-        </body>
+        {children}
+        <CookieBanner />
+      </body>
     </html>
   );
 }

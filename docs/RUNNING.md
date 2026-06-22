@@ -1,6 +1,6 @@
 # Running the Application
 
-This document covers the three ways to run the Sidetrack application: locally with pnpm (SQLite, no Docker), locally with Docker Compose (full PostgreSQL stack), and in production with the production Docker Compose.
+This document covers the three ways to run the SideTrack application: locally with pnpm (SQLite, no Docker), locally with Docker Compose (full PostgreSQL stack), and in production with the production Docker Compose.
 
 ---
 
@@ -127,11 +127,11 @@ Shell aliases are configured on both the laptop and the server to speed up commo
 
 ### Laptop Aliases
 
-| Alias          | Description                                                                                                                                  |
-| -------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| `side-connect` | Open an SSH connection to the Sidetrack VM.                                                                                                  |
-| `side-data`    | Runs `scripts/copy_backup.sh` — SSHs in, finds the latest backup, confirms, downloads it to `~/Desktop/SidetrackBackups/`. Optionally stages `csv/` into `database/data/` for a local Docker seed. |
-| `side-up`      | Build and start the local Docker stack (PostgreSQL) via `scripts/setup.sh local`.                                                            |
+| Alias          | Description                                                                                                                                                                                        |
+| -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `side-connect` | Open an SSH connection to the SideTrack VM.                                                                                                                                                        |
+| `side-data`    | Runs `scripts/copy_backup.sh` — SSHs in, finds the latest backup, confirms, downloads it to `~/Desktop/SideTrackBackups/`. Optionally stages `csv/` into `database/data/` for a local Docker seed. |
+| `side-up`      | Build and start the local Docker stack (PostgreSQL) via `scripts/setup.sh local`.                                                                                                                  |
 
 ### Server Aliases
 
@@ -157,11 +157,11 @@ After a reboot the Docker containers come back up automatically (`restart: unles
 
 Three helper scripts in `scripts/` manage the Cloudflare maintenance page independently of deployment:
 
-| Script | Purpose |
-| --- | --- |
-| `scripts/maintenance-on.sh` | Creates a Cloudflare Worker route that serves the maintenance page |
-| `scripts/maintenance-off.sh` | Deletes the Worker route, restoring normal traffic |
-| `scripts/utils.sh` | Sourced by the above; loads `.env.production` and derives domain + worker name |
+| Script                       | Purpose                                                                        |
+| ---------------------------- | ------------------------------------------------------------------------------ |
+| `scripts/maintenance-on.sh`  | Creates a Cloudflare Worker route that serves the maintenance page             |
+| `scripts/maintenance-off.sh` | Deletes the Worker route, restoring normal traffic                             |
+| `scripts/utils.sh`           | Sourced by the above; loads `.env.production` and derives domain + worker name |
 
 These are also called by `scripts/setup.sh production` around the build/restart cycle.
 

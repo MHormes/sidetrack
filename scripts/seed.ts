@@ -169,7 +169,7 @@ async function runSeed(db: any, pgMode: boolean) {
 // ── Entry point ─────────────────────────────────────────────────────────────
 
 async function seed() {
-  console.log("🌱 Sidetrack database seeden...");
+  console.log("🌱 SideTrack database seeden...");
   console.log(`   Driver : ${isPg ? "PostgreSQL" : "SQLite"}`);
   console.log(`   Modus  : ${isForce ? "force (restore)" : "smart (eerste run)"}\n`);
 

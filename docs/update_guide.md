@@ -1,4 +1,4 @@
-# Sidetrack — Monthly Update Guide
+# SideTrack — Monthly Update Guide
 
 Run after server OS updates are done (see global `update_guide.md`). Do all steps locally first, then deploy once at the end.
 

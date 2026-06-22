@@ -1,6 +1,6 @@
-# Sidetrack
+# SideTrack
 
-Sidetrack is the official web presence for the Dutch band Sidetrack — a fast-loading Electronic Press Kit (EPK) combined with a pre-order merchandise shop. The site is self-hosted and designed to load in under a second.
+SideTrack is the official web presence for the Dutch band SideTrack — a fast-loading Electronic Press Kit (EPK) combined with a pre-order merchandise shop. The site is self-hosted and designed to load in under a second.
 
 ## Features
 

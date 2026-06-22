@@ -7,7 +7,7 @@ cd "$(dirname "$0")/.."
 # 1. Bepaal het profiel (standaard 'dev')
 PROFILE=${1:-dev}
 
-echo "🌟 Sidetrack setup — profiel: $PROFILE"
+echo "🌟 SideTrack setup — profiel: $PROFILE"
 
 # ─────────────────────────────────────────────────────────────────────────────
 # DEV MODUS — SQLite, geen Docker nodig
@@ -87,7 +87,7 @@ elif [ "$PROFILE" = "production" ]; then
     bash "$(dirname "$0")/maintenance-off.sh"
 
     echo ""
-    echo "✅ Sidetrack is live op $APP_URL"
+    echo "✅ SideTrack is live op $APP_URL"
 
 else
     echo "❌ Onbekend profiel: $PROFILE"

@@ -5,7 +5,7 @@ export default {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Onderhoud | Sidetrack</title>
+  <title>Onderhoud | SideTrack</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;700;900&display=swap" rel="stylesheet">
@@ -132,7 +132,7 @@ export default {
 </head>
 <body>
   <header>
-    <span class="wordmark">Sidetrack</span>
+    <span class="wordmark">SideTrack</span>
   </header>
 
   <main>

@@ -126,7 +126,7 @@ function customerEmailHtml(orderId: number, customer: Customer, items: OrderItem
         <!-- Header -->
         <tr>
           <td style="background:#1c1b19;border-top:3px solid #b87058;padding:28px 32px 24px;">
-            <p style="margin:0;font-size:20px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#f5f2ef;">Sidetrack</p>
+            <p style="margin:0;font-size:20px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#f5f2ef;">SideTrack</p>
             <p style="margin:6px 0 0;font-size:13px;color:#b0aca6;">Bevestiging van je bestelling</p>
           </td>
         </tr>
@@ -175,7 +175,7 @@ function customerEmailHtml(orderId: number, customer: Customer, items: OrderItem
         <!-- Footer -->
         <tr>
           <td style="background:#111110;padding:20px 32px;border-top:1px solid #272523;">
-            <p style="margin:0;font-size:12px;color:#4a4744;">Sidetrack &mdash; sidetracksounds.nl</p>
+            <p style="margin:0;font-size:12px;color:#4a4744;">SideTrack &mdash; sidetracksounds.nl</p>
           </td>
         </tr>
 
@@ -238,7 +238,7 @@ export async function sendOrderEmails(
       sendEmail({
         from: FROM_EMAIL,
         to: customer.email,
-        subject: `Bestelling #${orderId} ontvangen — Sidetrack`,
+        subject: `Bestelling #${orderId} ontvangen — SideTrack`,
         html: customerEmailHtml(orderId, customer, items),
       }),
       sendEmail({

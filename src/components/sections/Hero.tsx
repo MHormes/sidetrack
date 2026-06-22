@@ -3,14 +3,13 @@ import Image from "next/image";
 export default function Hero() {
   return (
     <section className="relative bg-base min-h-[calc(100vh-4rem)] flex flex-col items-center justify-center text-center px-4">
-
       <div className="absolute inset-0 bg-gradient-to-b from-elevated/60 to-base" />
 
       <div className="relative z-10 flex flex-col items-center gap-6">
         {/* Band logo */}
         <Image
           src="/images/logo/fineline.png"
-          alt="Sidetrack"
+          alt="SideTrack"
           width={1024}
           height={1394}
           className="w-56 sm:w-80 h-auto"
@@ -20,7 +19,7 @@ export default function Hero() {
         />
 
         <p className="text-lg sm:text-xl text-fg-muted tracking-wide max-w-md">
-          Altijd Sfeervol, Altijd Sidetrack!
+          Altijd Sfeervol, Altijd SideTrack!
         </p>
 
         {/* CTAs */}
