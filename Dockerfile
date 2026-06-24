@@ -1,7 +1,7 @@
-FROM node:22-alpine AS base
+FROM node:22-slim AS base
 RUN corepack enable && corepack prepare pnpm@9 --activate
 # Build tools needed for better-sqlite3 native module
-RUN apk add --no-cache python3 make g++
+RUN apt-get update && apt-get install -y --no-install-recommends python3 make g++ && rm -rf /var/lib/apt/lists/*
 
 # Stage 1: Install dependencies
 FROM base AS deps
@@ -17,12 +17,12 @@ COPY . .
 RUN pnpm build
 
 # Stage 3: Production runner
-FROM node:22-alpine AS runner
+FROM node:22-slim AS runner
 WORKDIR /app
 ENV NODE_ENV=production
 
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
+RUN groupadd --system --gid 1001 nodejs
+RUN useradd --system --uid 1001 --gid nodejs nextjs
 
 # Copy Next.js standalone output
 COPY --from=builder /app/public ./public
