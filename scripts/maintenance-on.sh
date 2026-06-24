@@ -14,6 +14,8 @@ RESPONSE=$(curl -s -X POST "https://api.cloudflare.com/client/v4/zones/$CLOUDFLA
 
 if [ "$(echo "$RESPONSE" | jq -r '.success')" == "true" ]; then
     echo "✅ Maintenance Route active."
+elif echo "$RESPONSE" | jq -r '.errors[].message' 2>/dev/null | grep -qi "route_pattern_exists\|already exists"; then
+    echo "⚠️ Maintenance mode already active. Continuing deployment."
 else
     echo "❌ Cloudflare Error: $RESPONSE"
     exit 1
