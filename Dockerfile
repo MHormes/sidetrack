@@ -1,5 +1,12 @@
 FROM node:26-slim AS base
 RUN npm install -g pnpm@11.9
+
+ENV CI=true
+
+# Tell pnpm where to keep its cache inside the container
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+
 # Build tools needed for better-sqlite3 native module
 RUN apt-get update && apt-get install -y --no-install-recommends python3 make g++ && rm -rf /var/lib/apt/lists/*
 
