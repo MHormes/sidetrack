@@ -1,12 +1,12 @@
-FROM node:22-slim AS base
-RUN corepack enable && corepack prepare pnpm@9 --activate
+FROM node:26-slim AS base
+RUN npm install -g pnpm@11.9
 # Build tools needed for better-sqlite3 native module
 RUN apt-get update && apt-get install -y --no-install-recommends python3 make g++ && rm -rf /var/lib/apt/lists/*
 
 # Stage 1: Install dependencies
 FROM base AS deps
 WORKDIR /app
-COPY package.json pnpm-lock.yaml ./
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 RUN pnpm install --frozen-lockfile
 
 # Stage 2: Build the app
@@ -17,7 +17,7 @@ COPY . .
 RUN pnpm build
 
 # Stage 3: Production runner
-FROM node:22-slim AS runner
+FROM node:26-slim AS runner
 WORKDIR /app
 ENV NODE_ENV=production
 
