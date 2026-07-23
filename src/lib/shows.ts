@@ -29,9 +29,9 @@ export function stripTime(dateStr: string): string {
 // Add all shows here. upcoming/past split is automatic based on date.
 // Shows become "past" starting the day after the show date.
 export const allShows: Show[] = [
+  { date: "12 sep 2026 n.t.b.", venue: "Scouting", city: "Roermond", private: true },
+  { date: "29 jul 2026 18.00 & 19.00", venue: "Sjoemelmert Remunj (Aeve Choppe)", city: "Roermond"},
   { date: "28 jun 2026 13.45, 15.15 & 16.45", venue: "Gluren bij de Buren 2026", city: "Herten", infoUrl: "https://glurenbijdeburen.nl/nl/programma/roermond#1416" },
-  { date: "29 jul 2026 n.t.b.", venue: "Sjoemelmert Remunj (Aeve Choppe)", city: "Roermond"},
-  // { date: "12 sep 2026 n.t.b.", venue: "Scouting", city: "Roermond", possibly: true },
   { date: "20 jun 2026", venue: "Munsterplein (Cultuurnacht)", city: "Roermond", infoUrl: "https://www.instagram.com/p/DZLE8lYIJQR/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" },
   { date: "30 mei 2026", venue: "Postert Laef", city: "Posterholt", ticketUrl: "https://roerdalelaef.nl/tickets1/", infoUrl: "https://roerdalelaef.nl" },
   { date: "10 mei 2026", venue: "Venhof", city: "Herkenbosch", infoUrl: "https://www.instagram.com/p/DXH67I_CGOF/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" },
