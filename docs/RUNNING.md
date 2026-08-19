@@ -78,13 +78,13 @@ This spins up the full stack (Next.js app + PostgreSQL) in Docker containers usi
 
 ## 3. Production Docker Compose
 
-The production setup (`compose.yaml`) runs on the Proxmox server and includes a Cloudflare Tunnel container for public HTTPS access via `sidetracksounds.nl`. The database port is not exposed to the host — all traffic goes through the tunnel.
+The production setup (`compose.yaml`) runs on the Proxmox server. Public HTTPS access via `sidetracksounds.nl` is provided by Cloudflare Tunnel, which runs in a separate, shared LXC container on the same Proxmox host (not in this repo's Docker Compose) — that LXC proxies to this VM's published `3000` port. The database port is not exposed to the host.
 
 **Prerequisites:**
 
 - An `.env.production` file on the server (use `.env.production.example` as a template)
-- A valid `CLOUDFLARE_TUNNEL_TOKEN` in `.env.production`
 - Docker installed on the server
+- The shared cloudflared LXC configured with a route for this VM (managed outside this repo)
 
 **Steps:**
 
@@ -111,13 +111,12 @@ The production setup (`compose.yaml`) runs on the Proxmox server and includes a 
 
 **What runs:**
 
-| Container          | Role                      |
-| ------------------ | ------------------------- |
-| `sidetrack_web`    | Next.js app               |
-| `sidetrack_db`     | PostgreSQL 17             |
-| `sidetrack_tunnel` | Cloudflare Tunnel (HTTPS) |
+| Container       | Role          |
+| --------------- | ------------- |
+| `sidetrack_web` | Next.js app   |
+| `sidetrack_db`  | PostgreSQL 17 |
 
-> The database is not exposed on any host port in production — it is only reachable from within the Docker network.
+> The database is not exposed on any host port in production — it is only reachable from within the Docker network. HTTPS/routing is handled outside this compose file by the shared cloudflared LXC.
 
 ---
 

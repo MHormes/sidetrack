@@ -19,7 +19,7 @@ SideTrack is the official web presence for the Dutch band SideTrack — a fast-l
 | Styling   | Tailwind CSS v4                      |
 | Database  | PostgreSQL 17 (SQLite in dev)        |
 | ORM       | Drizzle ORM                          |
-| Hosting   | Docker · Cloudflare Tunnel           |
+| Hosting   | Docker · Cloudflare (routed via a shared cloudflared LXC) |
 
 ## License
 

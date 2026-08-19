@@ -53,7 +53,7 @@ elif [ "$PROFILE" = "local" ]; then
     echo "   Migraties worden automatisch uitgevoerd bij het opstarten van de container."
 
 # ─────────────────────────────────────────────────────────────────────────────
-# PRODUCTION MODUS — PostgreSQL + Cloudflare Tunnel via Docker Compose
+# PRODUCTION MODUS — PostgreSQL via Docker Compose (Cloudflare routing via shared cloudflared LXC)
 # ─────────────────────────────────────────────────────────────────────────────
 elif [ "$PROFILE" = "production" ]; then
     ENV_SOURCE=".env.production"
